@@ -1,17 +1,17 @@
 import { faker } from '@faker-js/faker';
 
-import {RegistrationsGatewayMemory} from "~/gateways/registrations-gateway-memory.ts";
+import {RegistrationGatewayMemory} from "~/gateways/registration-gateway-memory.ts";
 import {Registration} from "~/entities/registration.ts";
 
 describe('Gateways > Registrations Memory', () => {
     it('starts with no registrations', async () => {
-        const gateway = new RegistrationsGatewayMemory();
+        const gateway = new RegistrationGatewayMemory();
         const registrations = await gateway.get();
         expect(registrations).toEqual([]);
     })
 
     it('creates a registration', async () => {
-        const gateway = new RegistrationsGatewayMemory();
+        const gateway = new RegistrationGatewayMemory();
         const registation = new Registration(
             faker.string.uuid(),
             faker.person.fullName(),
@@ -26,7 +26,7 @@ describe('Gateways > Registrations Memory', () => {
     })
 
     it('deletes a registration', async () => {
-        const gateway = new RegistrationsGatewayMemory();
+        const gateway = new RegistrationGatewayMemory();
         const registation = new Registration(
             faker.string.uuid(),
             faker.person.fullName(),
@@ -42,7 +42,7 @@ describe('Gateways > Registrations Memory', () => {
     })
 
     it('updates a registration', async () => {
-        const gateway = new RegistrationsGatewayMemory();
+        const gateway = new RegistrationGatewayMemory();
         const registation = new Registration(
             faker.string.uuid(),
             faker.person.fullName(),

@@ -1,7 +1,7 @@
-import { RegistrationsGateway } from './registrations-gateway'
+import { RegistrationGateway } from './registration-gateway'
 import {Registration} from "~/entities/registration.ts";
 
-export class RegistrationsGatewayMemory implements RegistrationsGateway {
+export class RegistrationGatewayMemory implements RegistrationGateway {
   private registrations: Registration[] = [];
 
   create(registration: Registration): Promise<void> {

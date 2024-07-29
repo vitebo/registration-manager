@@ -1,6 +1,6 @@
 import { Registration } from "~/entities/registration"
 
-export interface RegistrationsGateway {
+export interface RegistrationGateway {
   get(): Promise<Registration[]>
   update(registration: Registration): Promise<void>
   delete(registration: Registration): Promise<void>
