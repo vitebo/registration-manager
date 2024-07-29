@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72",
   "scripts": {
     "dev": "vite",
     "init:db": "json-server --watch db.json",
@@ -45,6 +46,5 @@
     "ts-node": "10.9.2",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
-  },
-  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
+  }
 }
