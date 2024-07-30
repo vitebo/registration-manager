@@ -30,4 +30,20 @@ module.exports = {
     "import/named": "off",
     "react-hooks/exhaustive-deps": "warn"
   },
+  overrides: [
+    {
+      files: ["*.test.ts"],
+      settings: {
+        'import/resolver': {
+          typescript: {
+            project: "./tsconfig.test.json",
+          },
+          node: {
+            paths: ['src', 'test'],
+            extensions: ['.js', '.jsx', '.ts', '.tsx'],
+          },
+        },
+      }
+    }
+  ]
 };
