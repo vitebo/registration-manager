@@ -2,7 +2,7 @@ import { HiOutlineMail, HiOutlineUser, HiOutlineCalendar, HiOutlineTrash } from 
 
 import { ButtonSmall } from '~/components/Buttons';
 import { Registration, RegistrationStatusEnum } from '~/entities';
-import { useRegistrationStatus, useDeleteRegistration } from '~/hooks';
+import { useUpdateRegistrationStatus, useDeleteRegistration } from '~/hooks';
 
 import * as S from './styles';
 
@@ -11,8 +11,8 @@ type Props = {
 };
 
 export const RegistrationCard = ({ registration }: Props) => {
-  const registrationStatusAction = useRegistrationStatus();
-  const deleteRegistrationAction = useDeleteRegistration();
+  const registrationUpdateStatus = useUpdateRegistrationStatus();
+  const deleteRegistration = useDeleteRegistration();
 
   return (
     <S.Card>
@@ -30,21 +30,21 @@ export const RegistrationCard = ({ registration }: Props) => {
       </S.IconAndText>
       <S.Actions>
         {registration.status.canUpdate(RegistrationStatusEnum.REPROVED) && (
-          <ButtonSmall bgcolor="rgb(255, 145, 154)" onClick={() => registrationStatusAction.reprove(registration)}>
+          <ButtonSmall bgcolor="rgb(255, 145, 154)" onClick={() => registrationUpdateStatus.reprove(registration)}>
             Reprovar
           </ButtonSmall>
         )}
         {registration.status.canUpdate(RegistrationStatusEnum.APPROVED) && (
-          <ButtonSmall bgcolor="rgb(155, 229, 155)" onClick={() => registrationStatusAction.approve(registration)}>
+          <ButtonSmall bgcolor="rgb(155, 229, 155)" onClick={() => registrationUpdateStatus.approve(registration)}>
             Aprovar
           </ButtonSmall>
         )}
         {registration.status.canUpdate(RegistrationStatusEnum.REVIEW) && (
-          <ButtonSmall bgcolor="#ff8858" onClick={() => registrationStatusAction.review(registration)}>
+          <ButtonSmall bgcolor="#ff8858" onClick={() => registrationUpdateStatus.review(registration)}>
             Revisar novamente
           </ButtonSmall>
         )}
-        <HiOutlineTrash onClick={() => deleteRegistrationAction(registration)} />
+        <HiOutlineTrash onClick={() => deleteRegistration(registration)} />
       </S.Actions>
     </S.Card>
   );

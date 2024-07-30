@@ -4,7 +4,7 @@ import { DiContext, StoreContext } from '~/contexts';
 import { Registration } from '~/entities';
 import { replaceByKey } from '~/utils';
 
-export function useRegistrationStatus() {
+export function useUpdateRegistrationStatus() {
   const { registrationGateway } = useContext(DiContext);
   const { registrations, setRegistrations } = useContext(StoreContext);
 
