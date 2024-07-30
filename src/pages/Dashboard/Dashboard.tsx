@@ -17,9 +17,14 @@ export const Dashboard = () => {
     fetchRegistrations();
   }, [registrationGateway, setRegistrations]);
 
+  async function handleRefreshRegistrations() {
+    const newRegistrations = await registrationGateway.get();
+    setRegistrations(newRegistrations);
+  }
+
   return (
     <S.Container>
-      <SearchBar />
+      <SearchBar onClickRefresh={handleRefreshRegistrations} />
       <Collumns registrations={registrations} />
     </S.Container>
   );
