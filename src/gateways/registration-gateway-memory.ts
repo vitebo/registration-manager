@@ -1,22 +1,22 @@
-import { RegistrationGateway } from './registration-gateway'
-import {Registration} from "~/entities/registration.ts";
+import { RegistrationGateway } from './registration-gateway';
+import { Registration } from '~/entities/registration.ts';
 
 export class RegistrationGatewayMemory implements RegistrationGateway {
   private registrations: Registration[] = [];
 
   create(registration: Registration): Promise<Registration> {
     if (registration.id) {
-        this.registrations.push(registration);
-        return Promise.resolve(registration);
+      this.registrations.push(registration);
+      return Promise.resolve(registration);
     }
     const createdRegistration = new Registration({
-        id: String(this.registrations.length),
-        employeeName: registration.employeeName.value,
-        cpf: registration.cpf.value,
-        email: registration.email.value,
-        admissionDate: registration.admissionDate,
-        status: registration.status.value,
-    })
+      id: String(this.registrations.length),
+      employeeName: registration.employeeName.value,
+      cpf: registration.cpf.value,
+      email: registration.email.value,
+      admissionDate: registration.admissionDate,
+      status: registration.status.value
+    });
     this.registrations.push(createdRegistration);
     return Promise.resolve(createdRegistration);
   }
