@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 
 import {RegistrationGatewayMemory} from "~/gateways/registration-gateway-memory.ts";
 import {Registration} from "~/entities/registration.ts";
+import {RegistrationStatusEnum} from "~/entities/registration-status.ts";
 
 describe('Gateways > Registrations Memory', () => {
     it('starts with no registrations', async () => {
@@ -18,7 +19,7 @@ describe('Gateways > Registrations Memory', () => {
             '123',
             faker.internet.email(),
             faker.date.recent({ days: 10 }).toString(),
-            faker.internet.httpMethod(),
+            faker.helpers.enumValue(RegistrationStatusEnum),
         );
         await gateway.create(registation);
         const registrations = await gateway.get();
@@ -33,7 +34,7 @@ describe('Gateways > Registrations Memory', () => {
             '123',
             faker.internet.email(),
             faker.date.recent({ days: 10 }).toString(),
-            faker.internet.httpMethod(),
+            faker.helpers.enumValue(RegistrationStatusEnum),
         );
         await gateway.create(registation);
         await gateway.delete(registation);
@@ -49,7 +50,7 @@ describe('Gateways > Registrations Memory', () => {
             '123',
             faker.internet.email(),
             faker.date.recent({ days: 10 }).toString(),
-            faker.internet.httpMethod(),
+            faker.helpers.enumValue(RegistrationStatusEnum),
         );
         await gateway.create(registation);
         const updatedRegistration = new Registration(
@@ -58,7 +59,7 @@ describe('Gateways > Registrations Memory', () => {
             '123',
             faker.internet.email(),
             faker.date.recent({ days: 10 }).toString(),
-            faker.internet.httpMethod(),
+            faker.helpers.enumValue(RegistrationStatusEnum),
         );
         await gateway.update(updatedRegistration);
         const registrations = await gateway.get();
