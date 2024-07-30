@@ -1,4 +1,9 @@
-import { EmployeeName } from './employee-name'
+import {
+    EmployeeName,
+    EmployeeNameFirstLetterIsNumberError,
+    EmployeeNameEmptyError,
+    EmployeeNameDontHaveMoreThanOneNameError
+} from './employee-name'
 
 describe('Entities > Employee Name', () => {
     test("should create an Employee Name with valid value", () => {
@@ -17,14 +22,14 @@ describe('Entities > Employee Name', () => {
     });
 
     test("should not create an Employee Name with single name", () => {
-        expect(() => new EmployeeName("John")).toThrow(new Error("Invalid name"));
+        expect(() => new EmployeeName("John")).toThrow(new EmployeeNameDontHaveMoreThanOneNameError());
     });
 
     test("should not create an Employee Name without lastname", () => {
-        expect(() => new EmployeeName("John ")).toThrow(new Error("Invalid name"));
+        expect(() => new EmployeeName("John ")).toThrow(new EmployeeNameEmptyError());
     });
 
     test("should not create an Employee Name when fisrt letter is a number", () => {
-        expect(() => new EmployeeName("4 John")).toThrow(new Error("Invalid name"));
+        expect(() => new EmployeeName("4 John")).toThrow(new EmployeeNameFirstLetterIsNumberError());
     });
 })

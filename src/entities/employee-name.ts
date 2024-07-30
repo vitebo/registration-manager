@@ -1,28 +1,53 @@
+export class EmployeeNameFirstLetterIsNumberError extends Error {
+    name = "EmployeeNameFirstLetterIsNumberError";
+
+    constructor() {
+        super("First name letter cannot be a number");
+    }
+}
+
+export class EmployeeNameEmptyError extends Error {
+    name = "EmployeeNameEmptyError";
+
+    constructor() {
+        super("Name cannot be empty");
+    }
+}
+
+export class EmployeeNameDontHaveMoreThanOneNameError extends Error {
+    name = "EmployeeNameDontHaveMoreThanOneNameError";
+
+    constructor() {
+        super("Name must have more than one name");
+    }
+}
+
 export class EmployeeName {
     constructor (readonly value: string) {
-        if (this.isInvalidName(value)) throw new Error("Invalid name");
-    }
-
-    isInvalidName (value: string) {
         const names = value.split(" ");
-        if (!this.haveMoreThanOneName(names)) return true;
-        if (this.hasEmptyName(names)) return true;
-        const [firstName] = names;
-        return this.firstLetterIsNumber(firstName);
+        this.validateHaveMoreThanOneName(names)
+        this.validateHasEmptyName(names)
+        this.validateFirstLetterIsNumber(names)
     }
 
-    private haveMoreThanOneName(names: string[]) {
-        return names.length > 1;
+    private validateHaveMoreThanOneName(names: string[]) {
+        if (names.length <= 1) {
+            throw new EmployeeNameDontHaveMoreThanOneNameError();
+        }
     }
 
-    private hasEmptyName(names: string[]) {
-        return names.some(name => {
+    private validateHasEmptyName(names: string[]) {
+        const isEmpty = names.some(name => {
             if (name === "") return true;
         })
+        if (isEmpty) throw new EmployeeNameEmptyError();
     }
 
-    private firstLetterIsNumber (name: string) {
-        return this.isNumber(name.charAt(0));
+    private validateFirstLetterIsNumber (names: string[]) {
+        const [firstName] = names;
+        if (this.isNumber(firstName.charAt(0))) {
+            throw new EmployeeNameFirstLetterIsNumberError();
+        }
     }
 
     private isNumber(name: string) {
