@@ -1,28 +1,63 @@
+export class CpfEmptyError extends Error {
+    name = "CpfEmptyError";
+
+    constructor() {
+        super("Cpf cannot be empty");
+    }
+}
+
+export class CpfLengthError extends Error {
+    name = "CpfLengthError";
+
+    constructor() {
+        super("Cpf must have 11 digits");
+    }
+}
+
+export class CpfFormatError extends Error {
+    name = "CpfFormatError";
+
+    constructor() {
+        super("Invalid cpf format");
+    }
+}
+
 export class Cpf {
+    static LENGTH = 11;
+
     constructor (readonly value: string) {
-        if (!this.validate(value)) throw new Error("Invalid cpf");
+        this.validateIsEmpty(value)
+        this.validateLength(value)
+        this.validateAllDigitsAreTheSame(value)
+        this.validateFormat(value)
     }
 
-    private validate (cpf: string) {
-        if (!cpf) return false;
-        cpf = this.clean(cpf);
-        if (this.isInvalidLength(cpf)) return false;
-        if (this.allDigitsAreTheSame(cpf)) return false;
+    private validateIsEmpty (cpf: string) {
+        if (cpf === "") {
+            throw new CpfEmptyError();
+        }
+    }
+
+    private validateLength (cpf: string) {
+        if (cpf.length !== 11) {
+            throw new CpfLengthError();
+        }
+    }
+
+    private validateAllDigitsAreTheSame (cpf: string) {
+        const allDigistsAreTheSame = cpf.split("").every(c => c === cpf[0]);
+        if (allDigistsAreTheSame) {
+            throw new CpfFormatError();
+        }
+    }
+
+    private validateFormat (cpf: string) {
         const dg1 = this.calculateDigit(cpf, 10);
         const dg2 = this.calculateDigit(cpf, 11);
-        return this.extractCheckDigit(cpf) === `${dg1}${dg2}`;
-    }
-
-    private clean (cpf: string) {
-        return cpf.replace(/\D/g, "");
-    }
-
-    private isInvalidLength (cpf: string) {
-        return cpf.length !== 11;
-    }
-
-    private allDigitsAreTheSame (cpf: string) {
-        return cpf.split("").every(c => c === cpf[0]);
+        const isValid = this.extractCheckDigit(cpf) === `${dg1}${dg2}`;
+        if (!isValid) {
+            throw new CpfFormatError();
+        }
     }
 
     private calculateDigit (cpf: string, factor: number) {
