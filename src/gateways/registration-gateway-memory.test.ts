@@ -1,4 +1,5 @@
-import { faker } from '@faker-js/faker';
+import { fakerPT_BR as faker } from '@faker-js/faker';
+import { generate as generateCpf } from 'gerador-validador-cpf'
 
 import {RegistrationGatewayMemory} from "~/gateways/registration-gateway-memory.ts";
 import {Registration} from "~/entities/registration.ts";
@@ -16,7 +17,7 @@ describe('Gateways > Registrations Memory', () => {
         const registation = new Registration(
             faker.string.uuid(),
             faker.person.fullName(),
-            '123',
+            generateCpf(),
             faker.internet.email(),
             faker.date.recent({ days: 10 }).toString(),
             faker.helpers.enumValue(RegistrationStatusEnum),
@@ -31,7 +32,7 @@ describe('Gateways > Registrations Memory', () => {
         const registation = new Registration(
             faker.string.uuid(),
             faker.person.fullName(),
-            '123',
+            generateCpf(),
             faker.internet.email(),
             faker.date.recent({ days: 10 }).toString(),
             faker.helpers.enumValue(RegistrationStatusEnum),
@@ -47,7 +48,7 @@ describe('Gateways > Registrations Memory', () => {
         const registation = new Registration(
             faker.string.uuid(),
             faker.person.fullName(),
-            '123',
+            generateCpf(),
             faker.internet.email(),
             faker.date.recent({ days: 10 }).toString(),
             faker.helpers.enumValue(RegistrationStatusEnum),
@@ -56,7 +57,7 @@ describe('Gateways > Registrations Memory', () => {
         const updatedRegistration = new Registration(
             faker.string.uuid(),
             faker.person.fullName(),
-            '123',
+            generateCpf(),
             faker.internet.email(),
             faker.date.recent({ days: 10 }).toString(),
             faker.helpers.enumValue(RegistrationStatusEnum),
