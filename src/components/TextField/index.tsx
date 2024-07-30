@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, forwardRef } from "react";
 import styled from "styled-components";
 
 export const Input = styled.input`
@@ -24,14 +24,14 @@ type Props = {
   error?: string;
 } & InputHTMLAttributes<any>;
 
-const TextField = (props: Props) => {
+const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
   return (
     <div>
       <label htmlFor={props.id}>{props.label}</label>
-      <Input {...props} />
+      <Input ref={ref} {...props} />
       <span style={{fontSize: 12, color: 'red'}}>{props.error}</span>
     </div>
   );
-};
+});
 
 export default TextField;
