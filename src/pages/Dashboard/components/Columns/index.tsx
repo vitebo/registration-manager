@@ -28,7 +28,7 @@ const Collumns = (props: Props) => {
                                     ?.map((registration) => {
                                     return (
                                         <RegistrationCard
-                                            data={registration}
+                                            registration={registration}
                                             key={registration.id}
                                         />
                                     );
