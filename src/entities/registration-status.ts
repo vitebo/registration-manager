@@ -6,7 +6,7 @@ export enum RegistrationStatusEnum {
   REVIEW = 'REVIEW'
 }
 
-abstract class RegistrationStatus {
+export abstract class RegistrationStatus {
   abstract value: RegistrationStatusEnum;
 
   protected constructor(readonly registation: Registration) {}
@@ -14,6 +14,7 @@ abstract class RegistrationStatus {
   abstract approve(): void;
   abstract reprove(): void;
   abstract review(): void;
+  abstract canUpdate(status: RegistrationStatusEnum): boolean;
 }
 
 export class ApprovedStatus extends RegistrationStatus {
@@ -33,6 +34,10 @@ export class ApprovedStatus extends RegistrationStatus {
 
   review(): void {
     this.registation.status = new ReviewStatus(this.registation);
+  }
+
+  canUpdate(status: RegistrationStatusEnum): boolean {
+    return status === RegistrationStatusEnum.REVIEW;
   }
 }
 
@@ -54,6 +59,10 @@ export class ReprovedStatus extends RegistrationStatus {
   review(): void {
     this.registation.status = new ReviewStatus(this.registation);
   }
+
+  canUpdate(status: RegistrationStatusEnum): boolean {
+    return status === RegistrationStatusEnum.REVIEW;
+  }
 }
 
 export class ReviewStatus extends RegistrationStatus {
@@ -73,6 +82,10 @@ export class ReviewStatus extends RegistrationStatus {
 
   review(): void {
     throw new Error('Invalid status');
+  }
+
+  canUpdate(status: RegistrationStatusEnum): boolean {
+    return [RegistrationStatusEnum.APPROVED, RegistrationStatusEnum.REPROVED].includes(status);
   }
 }
 
