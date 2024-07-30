@@ -1,9 +1,6 @@
-import { fakerPT_BR as faker } from '@faker-js/faker';
-import { generate as generateCpf } from 'gerador-validador-cpf'
+import { RegistrationFactory } from '~~/test/factory'
 
 import {RegistrationGatewayMemory} from "~/gateways/registration-gateway-memory.ts";
-import {Registration} from "~/entities/registration.ts";
-import {RegistrationStatusEnum} from "~/entities/registration-status.ts";
 
 describe('Gateways > Registrations Memory', () => {
     it('starts with no registrations', async () => {
@@ -14,14 +11,7 @@ describe('Gateways > Registrations Memory', () => {
 
     it('creates a registration', async () => {
         const gateway = new RegistrationGatewayMemory();
-        const registation = new Registration(
-            faker.string.uuid(),
-            faker.person.fullName(),
-            generateCpf(),
-            faker.internet.email(),
-            faker.date.recent({ days: 10 }).toString(),
-            faker.helpers.enumValue(RegistrationStatusEnum),
-        );
+        const registation = RegistrationFactory.create();
         await gateway.create(registation);
         const registrations = await gateway.get();
         expect(registrations).toEqual([registation]);
@@ -29,14 +19,7 @@ describe('Gateways > Registrations Memory', () => {
 
     it('deletes a registration', async () => {
         const gateway = new RegistrationGatewayMemory();
-        const registation = new Registration(
-            faker.string.uuid(),
-            faker.person.fullName(),
-            generateCpf(),
-            faker.internet.email(),
-            faker.date.recent({ days: 10 }).toString(),
-            faker.helpers.enumValue(RegistrationStatusEnum),
-        );
+        const registation = RegistrationFactory.create();
         await gateway.create(registation);
         await gateway.delete(registation);
         const registrations = await gateway.get();
@@ -45,23 +28,9 @@ describe('Gateways > Registrations Memory', () => {
 
     it('updates a registration', async () => {
         const gateway = new RegistrationGatewayMemory();
-        const registation = new Registration(
-            faker.string.uuid(),
-            faker.person.fullName(),
-            generateCpf(),
-            faker.internet.email(),
-            faker.date.recent({ days: 10 }).toString(),
-            faker.helpers.enumValue(RegistrationStatusEnum),
-        );
+        const registation = RegistrationFactory.create();
         await gateway.create(registation);
-        const updatedRegistration = new Registration(
-            faker.string.uuid(),
-            faker.person.fullName(),
-            generateCpf(),
-            faker.internet.email(),
-            faker.date.recent({ days: 10 }).toString(),
-            faker.helpers.enumValue(RegistrationStatusEnum),
-        );
+        const updatedRegistration = RegistrationFactory.create()
         await gateway.update(updatedRegistration);
         const registrations = await gateway.get();
         expect(registrations).toEqual([updatedRegistration]);
