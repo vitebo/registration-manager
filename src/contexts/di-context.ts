@@ -1,6 +1,6 @@
 import { createContext } from 'react';
-import { RegistrationGateway } from '~/gateways/registration-gateway.ts';
-import { RegistrationGatewayMemory } from '~/gateways/registration-gateway-memory';
+
+import { RegistrationGatewayMemory, RegistrationGateway } from '~/gateways';
 
 interface DiContextValue {
   registrationGateway: RegistrationGateway;

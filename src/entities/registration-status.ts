@@ -6,7 +6,7 @@ export enum RegistrationStatusEnum {
   REVIEW = 'REVIEW'
 }
 
-export default abstract class RegistrationStatus {
+abstract class RegistrationStatus {
   abstract value: RegistrationStatusEnum;
 
   protected constructor(readonly registation: Registration) {}

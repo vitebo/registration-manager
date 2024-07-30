@@ -1,7 +1,8 @@
+import { Registration, RegistrationStatusEnum } from '~/entities';
+
 import * as S from './styles';
-import RegistrationCard from '../RegistrationCard';
-import { Registration } from '~/entities/registration';
-import { RegistrationStatusEnum } from '~/entities/registration-status';
+// eslint-disable-next-line no-restricted-imports
+import { RegistrationCard } from '../RegistrationCard';
 
 const allColumns = [
   { status: RegistrationStatusEnum.REVIEW, title: 'Pronto para revisar' },
@@ -12,7 +13,8 @@ const allColumns = [
 type Props = {
   registrations?: Registration[];
 };
-const Collumns = (props: Props) => {
+
+export const Collumns = (props: Props) => {
   return (
     <S.Container>
       {allColumns.map((collum) => {
@@ -34,4 +36,3 @@ const Collumns = (props: Props) => {
     </S.Container>
   );
 };
-export default Collumns;

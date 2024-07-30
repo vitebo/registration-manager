@@ -1,4 +1,4 @@
-import { HttpClient } from '~/drivers/http-client.ts';
+import { HttpClient } from '~/drivers';
 
 export class HttpClientFetch implements HttpClient {
   async get<T>(url: string, headers: Headers): Promise<T> {

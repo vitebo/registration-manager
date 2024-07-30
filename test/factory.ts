@@ -1,7 +1,7 @@
-import { Registration } from '~/entities/registration.ts';
 import { fakerPT_BR as faker } from '@faker-js/faker';
 import { generate as generateCpf } from 'gerador-validador-cpf';
-import { RegistrationStatusEnum } from '~/entities/registration-status.ts';
+
+import { RegistrationStatusEnum, Registration } from '~/entities';
 
 export class RegistrationFactory {
   static create({

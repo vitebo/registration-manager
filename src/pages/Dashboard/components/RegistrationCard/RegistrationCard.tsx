@@ -1,14 +1,16 @@
-import { ButtonSmall } from '~/components/Buttons';
-import { Registration } from '~/entities/registration';
-import * as S from './styles';
 import { HiOutlineMail, HiOutlineUser, HiOutlineCalendar, HiOutlineTrash } from 'react-icons/hi';
-import { useRegistrationStatus } from '~/hooks/use-registration-status';
+
+import { ButtonSmall } from '~/components/Buttons';
+import { Registration } from '~/entities';
+import { useRegistrationStatus } from '~/hooks';
+
+import * as S from './styles';
 
 type Props = {
   registration: Registration;
 };
 
-const RegistrationCard = ({ registration }: Props) => {
+export const RegistrationCard = ({ registration }: Props) => {
   const registrationStatus = useRegistrationStatus();
 
   return (
@@ -40,5 +42,3 @@ const RegistrationCard = ({ registration }: Props) => {
     </S.Card>
   );
 };
-
-export default RegistrationCard;

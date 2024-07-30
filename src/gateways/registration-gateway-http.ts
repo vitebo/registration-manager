@@ -1,7 +1,7 @@
+import { HttpClient } from '~/drivers';
+import { RegistrationStatusEnum, Registration } from '~/entities';
+
 import { RegistrationGateway } from './registration-gateway';
-import { Registration } from '~/entities/registration.ts';
-import { HttpClient } from '~/drivers/http-client.ts';
-import { RegistrationStatusEnum } from '~/entities/registration-status.ts';
 
 interface RegistrationData {
   id: string;

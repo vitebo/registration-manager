@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+// TODO: turn private
 export const _IconButtonStyled = styled.button`
   cursor: pointer;
   border: 2px solid #64a98c;

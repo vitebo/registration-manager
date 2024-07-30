@@ -1,4 +1,4 @@
-import { Email, EmailFormatError, EmailEmptyError } from '~/entities/email';
+import { Email, EmailFormatError, EmailEmptyError } from '~/entities';
 
 export class EmailValidation {
   static validate(value: string): string | undefined {

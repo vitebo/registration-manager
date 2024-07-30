@@ -1,5 +1,6 @@
 import { createContext } from 'react';
-import { Registration } from '~/entities/registration';
+
+import { Registration } from '~/entities';
 
 interface StoreContextValue {
   registrations: Registration[];

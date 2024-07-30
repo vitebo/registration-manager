@@ -1,4 +1,4 @@
-import { RegistrationFactory } from '~~/test/factory.ts';
+import { RegistrationFactory } from '~~/test/factory';
 
 import { RegistrationStatusEnum, RegistrationStatusFactory } from './registration-status';
 

@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { DiContext } from '~/contexts/di-context';
-import { StoreContext } from '~/contexts/store-context';
-import { Registration } from '~/entities/registration';
-import { replaceByKey } from '~/utils/list';
+
+import { DiContext, StoreContext } from '~/contexts';
+import { Registration } from '~/entities';
+import { replaceByKey } from '~/utils';
 
 export function useRegistrationStatus() {
   const { registrationGateway } = useContext(DiContext);

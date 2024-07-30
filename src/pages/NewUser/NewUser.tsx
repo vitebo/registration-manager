@@ -1,19 +1,16 @@
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import TextField from '~/components/TextField';
-import * as S from './styles';
-import Button from '~/components/Buttons';
 import { HiOutlineArrowLeft } from 'react-icons/hi';
-import { IconButton } from '~/components/Buttons/IconButton';
 import { useHistory } from 'react-router-dom';
-import routes from '~/router/routes';
-import { EmployeeNameValidation } from '~/validations/employee-name-validation';
-import { EmailValidation } from '~/validations/email-validation';
-import { CpfValidation } from '~/validations/cpf-validation';
-import { DiContext } from '~/contexts/di-context';
-import { StoreContext } from '~/contexts/store-context';
-import { Registration } from '~/entities/registration.ts';
-import { RegistrationStatusEnum } from '~/entities/registration-status';
+
+import { Button, IconButton } from '~/components/Buttons';
+import { TextField } from '~/components/TextField';
+import { DiContext, StoreContext } from '~/contexts';
+import { Registration, RegistrationStatusEnum } from '~/entities';
+import { routes } from '~/router';
+import { CpfValidation, EmailValidation, EmployeeNameValidation } from '~/validations';
+
+import * as S from './styles';
 
 type FormValues = {
   name: string;
@@ -22,7 +19,7 @@ type FormValues = {
   admissionDate: Date;
 };
 
-const NewUserPage = () => {
+export const NewUserPage = () => {
   const history = useHistory();
   const goToHome = () => {
     history.push(routes.dashboard);
@@ -89,5 +86,3 @@ const NewUserPage = () => {
     </S.Container>
   );
 };
-
-export default NewUserPage;

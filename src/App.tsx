@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import Router from '~/router';
-import { Header } from './components/Header';
-import { StoreContext } from '~/contexts/store-context';
-import { Registration } from '~/entities/registration';
 
-function App() {
+import { Header } from '~/components/Header';
+import { StoreContext } from '~/contexts';
+import { Registration } from '~/entities';
+import { Router } from '~/router';
+
+export function App() {
   const [registrations, setRegistrations] = useState<Registration[]>([]);
 
   return (
@@ -16,5 +17,3 @@ function App() {
     </StoreContext.Provider>
   );
 }
-
-export default App;

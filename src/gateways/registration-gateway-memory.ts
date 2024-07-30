@@ -1,5 +1,6 @@
+import { Registration } from '~/entities';
+
 import { RegistrationGateway } from './registration-gateway';
-import { Registration } from '~/entities/registration.ts';
 
 export class RegistrationGatewayMemory implements RegistrationGateway {
   private registrations: Registration[] = [];

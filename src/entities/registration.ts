@@ -1,7 +1,7 @@
-import RegistrationStatus, { RegistrationStatusFactory, RegistrationStatusEnum } from './registration-status';
-import { EmployeeName } from './employee-name';
-import { Email } from './email';
 import { Cpf } from './cpf';
+import { Email } from './email';
+import { EmployeeName } from './employee-name';
+import RegistrationStatus, { RegistrationStatusFactory, RegistrationStatusEnum } from './registration-status';
 
 interface RegistrationProps {
   id?: string;

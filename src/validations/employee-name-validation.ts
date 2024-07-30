@@ -3,7 +3,7 @@ import {
   EmployeeNameFirstLetterIsNumberError,
   EmployeeNameEmptyError,
   EmployeeNameDontHaveMoreThanOneNameError
-} from '~/entities/employee-name';
+} from '~/entities';
 
 export class EmployeeNameValidation {
   static validate(value: string): string | undefined {

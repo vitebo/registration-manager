@@ -1,4 +1,4 @@
-import { Cpf, CpfLengthError, CpfFormatError, CpfEmptyError } from '~/entities/cpf';
+import { Cpf, CpfLengthError, CpfFormatError, CpfEmptyError } from '~/entities';
 
 export class CpfValidation {
   static validate(value: string): string | undefined {

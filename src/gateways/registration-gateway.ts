@@ -1,4 +1,4 @@
-import { Registration } from '~/entities/registration';
+import { Registration } from '~/entities';
 
 export interface RegistrationGateway {
   get(): Promise<Registration[]>;

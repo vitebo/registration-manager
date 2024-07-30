@@ -1,11 +1,11 @@
 import { useEffect, useContext } from 'react';
-import Collumns from './components/Columns';
-import * as S from './styles';
-import { SearchBar } from './components/Searchbar';
-import { StoreContext } from '~/contexts/store-context.ts';
-import { DiContext } from '~/contexts/di-context';
 
-const DashboardPage = () => {
+import { DiContext, StoreContext } from '~/contexts';
+
+import { SearchBar, Collumns } from './components';
+import * as S from './styles';
+
+export const Dashboard = () => {
   const { registrations, setRegistrations } = useContext(StoreContext);
   const { registrationGateway } = useContext(DiContext);
 
@@ -15,7 +15,7 @@ const DashboardPage = () => {
       setRegistrations(registrations);
     };
     fetchRegistrations();
-  }, []);
+  }, [registrationGateway, setRegistrations]);
 
   return (
     <S.Container>
@@ -24,4 +24,3 @@ const DashboardPage = () => {
     </S.Container>
   );
 };
-export default DashboardPage;

@@ -1,6 +1,5 @@
+import { RegistrationGatewayMemory } from '~/gateways';
 import { RegistrationFactory } from '~~/test/factory';
-
-import { RegistrationGatewayMemory } from '~/gateways/registration-gateway-memory.ts';
 
 describe('Gateways > Registrations Memory', () => {
   it('starts with no registrations', async () => {
