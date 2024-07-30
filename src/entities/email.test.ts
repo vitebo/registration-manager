@@ -1,4 +1,4 @@
-import { Email } from "./email";
+import { Email, EmailEmptyError, EmailFormatError } from "./email";
 
 describe('Entities > CPF', () => {
     test.each([
@@ -11,12 +11,16 @@ describe('Entities > CPF', () => {
         expect(new Email(email)).toBeDefined();
     });
 
+    test("should not create a email with empty value", () => {
+        expect(() => new Email("")).toThrow(new EmailEmptyError());
+    });
+
     test.each([
         'joao.silva@@example.com',
         'maria_oliveiraexample.org',
         'carlos-almeida123@.net',
         'pedro.123@example',
     ])("should not create a email with value %s", (email) => {
-        expect(() => new Email(email as string)).toThrow(new Error("Invalid email"));
+        expect(() => new Email(email as string)).toThrow(new EmailFormatError());
     });
 })
