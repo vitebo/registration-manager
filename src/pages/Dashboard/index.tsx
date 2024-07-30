@@ -1,13 +1,17 @@
 import Collumns from "./components/Columns";
 import * as S from "./styles";
-import { SearchBar } from "./components/Searchbar";
+import {SearchBar} from "./components/Searchbar";
+import {useContext} from "react";
+import {StoreContext} from "~/contexts/store-context.ts";
 
 const DashboardPage = () => {
-  return (
-    <S.Container>
-      <SearchBar />
-      <Collumns registrations={[]} />
-    </S.Container>
-  );
+    const {registrations} = useContext(StoreContext)
+
+    return (
+        <S.Container>
+            <SearchBar/>
+            <Collumns registrations={registrations}/>
+        </S.Container>
+    );
 };
 export default DashboardPage;
