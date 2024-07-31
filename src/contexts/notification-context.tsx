@@ -27,14 +27,14 @@ export const NotificationProvider = ({ children }: NotificationProviderProps) =>
 
   function addNotification({ message, type }: Omit<NotificationData, 'id'>) {
     const id = Date.now();
-    setNotifications([...notifications, { message, type, id }]);
+    setNotifications((prevNotifications) => [...prevNotifications, { message, type, id }]);
     setTimeout(() => {
       closeNotification(id);
     }, NOTIFICATION_DURATION_IN_MS);
   }
 
   function closeNotification(id: number) {
-    setNotifications(notifications.filter((n) => n.id !== id));
+    setNotifications((prevNotifications) => prevNotifications.filter((n) => n.id !== id));
   }
 
   return (
