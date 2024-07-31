@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 
 import { Confirm } from '~/components/Confirm';
-import { DiContext, ModalContext, StoreContext } from '~/contexts';
+import { NotificationType } from '~/components/Notification';
+import { DiContext, ModalContext, NotificationContext, StoreContext } from '~/contexts';
 import { Registration } from '~/entities';
 import { replaceByKey } from '~/utils';
 
@@ -16,6 +17,7 @@ export function useUpdateRegistrationStatus() {
   const { registrationGateway } = useContext(DiContext);
   const { registrations, setRegistrations } = useContext(StoreContext);
   const { openModal, closeModal } = useContext(ModalContext);
+  const { addNotification } = useContext(NotificationContext);
 
   function confirmAction({ registration, title, message, action }: ConfirmActionInput) {
     openModal(
@@ -23,13 +25,27 @@ export function useUpdateRegistrationStatus() {
         title,
         message,
         onConfirm: async () => {
-          action();
-          const updatedRegistration = await registrationGateway.update(registration);
-          const newRegistrations = replaceByKey(registrations, 'id', updatedRegistration);
-          setRegistrations(newRegistrations);
-          closeModal();
+          try {
+            action();
+            const updatedRegistration = await registrationGateway.update(registration);
+            const newRegistrations = replaceByKey(registrations, 'id', updatedRegistration);
+            setRegistrations(newRegistrations);
+            addNotification({
+              type: NotificationType.SUCCESS,
+              message: 'Cadastro atualizado com sucesso'
+            });
+          } catch (error) {
+            addNotification({
+              type: NotificationType.ERROR,
+              message: 'Erro ao atualizar cadastro'
+            });
+          } finally {
+            closeModal();
+          }
         },
-        onCancel: () => closeModal()
+        onCancel: () => {
+          closeModal();
+        }
       })
     );
   }
