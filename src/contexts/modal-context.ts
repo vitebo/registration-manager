@@ -2,13 +2,15 @@ import type { ReactNode } from 'react';
 import { createContext } from 'react';
 
 interface ModalContextValue {
-  modal: boolean;
-  handleModal: (content?: ReactNode) => void;
+  isModalOpen: boolean;
+  openModal: (content: ReactNode) => void;
+  closeModal: () => void;
   modalContent: ReactNode;
 }
 
 export const ModalContext = createContext<ModalContextValue>({
-  modal: false,
-  handleModal: () => {},
+  isModalOpen: false,
+  openModal: () => {},
+  closeModal: () => {},
   modalContent: null
 });

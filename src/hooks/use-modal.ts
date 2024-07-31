@@ -2,15 +2,18 @@ import type { ReactNode } from 'react';
 import { useState } from 'react';
 
 export function useModal() {
-  const [modal, setModal] = useState(false);
-  const [modalContent, setModalContent] = useState<ReactNode>("I'm the Modal Content");
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState<ReactNode>(null);
 
-  function handleModal(content: ReactNode) {
-    setModal(!modal);
-    if (content) {
-      setModalContent(content);
-    }
+  function openModal(content: ReactNode) {
+    setModalContent(content);
+    setModalOpen(true);
   }
 
-  return { modal, handleModal, modalContent };
+  function closeModal() {
+    setModalOpen(false);
+    setModalContent(null);
+  }
+
+  return { isModalOpen, openModal, closeModal, modalContent };
 }

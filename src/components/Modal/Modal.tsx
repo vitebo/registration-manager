@@ -6,12 +6,12 @@ import { ModalContext } from '~/contexts';
 import * as S from './styles';
 
 export const Modal = () => {
-  const { modalContent, modal, handleModal } = useContext(ModalContext);
+  const { modalContent, isModalOpen, closeModal } = useContext(ModalContext);
 
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        handleModal();
+        closeModal();
       }
     };
     document.addEventListener('keydown', handleEscape);
@@ -23,16 +23,16 @@ export const Modal = () => {
   function handleClickOverlay(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     event.stopPropagation();
     if (event.target === event.currentTarget) {
-      handleModal();
+      closeModal();
     }
   }
 
-  if (!modal) return null;
+  if (!isModalOpen) return null;
 
   return (
     <S.Overlay onClick={handleClickOverlay}>
       <S.Card>
-        <S.CloseButton onClick={() => handleModal()}>
+        <S.CloseButton onClick={() => closeModal()}>
           <HiOutlineX />
         </S.CloseButton>
         <S.Content>{modalContent}</S.Content>

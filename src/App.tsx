@@ -11,13 +11,14 @@ import { Router } from '~/router';
 
 export function App() {
   const [registrations, setRegistrations] = useState<Registration[]>([]);
-  const { modal, handleModal, modalContent } = useModal();
+  const { isModalOpen, closeModal, openModal, modalContent } = useModal();
 
   return (
     <StoreContext.Provider value={{ registrations, setRegistrations }}>
-      <ModalContext.Provider value={{ modal, handleModal, modalContent }}>
+      <ModalContext.Provider value={{ isModalOpen, closeModal, openModal, modalContent }}>
         <Header>
           <h1>Caju Front Teste</h1>
+          <button onClick={() => openModal('vitebo')}>Open Modal</button>
         </Header>
         <Router />
         {createPortal(<Modal />, document.getElementById(MODAL_ROOT_ELEMENT_ID) as HTMLElement)}
