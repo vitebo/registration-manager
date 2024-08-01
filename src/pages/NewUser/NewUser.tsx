@@ -1,12 +1,12 @@
-import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { HiOutlineArrowLeft } from 'react-icons/hi';
 import { useHistory } from 'react-router-dom';
 
 import { Button, IconButton } from '~/components/Buttons';
 import { TextField } from '~/components/TextField';
-import { RegistrationStoreContext } from '~/contexts';
-import { Registration, RegistrationStatusEnum } from '~/entities';
+import { ActionStatus } from '~/constants';
+import { Registration } from '~/entities';
+import { useCreateRegistration } from '~/hooks';
 import { routes } from '~/router';
 import { CpfValidation, EmailValidation, EmployeeNameValidation } from '~/validations';
 
@@ -25,21 +25,27 @@ export const NewUserPage = () => {
     history.push(routes.dashboard);
   };
 
-  const { register, handleSubmit, reset } = useForm<FormValues>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm<FormValues>();
 
-  const { createRegistration } = useContext(RegistrationStoreContext);
+  const createRegistration = useCreateRegistration();
 
   const onSubmit = handleSubmit(async (data) => {
     const registration = new Registration({
       employeeName: data.name,
       cpf: data.cpf,
       email: data.email,
-      admissionDate: data.admissionDate,
-      status: RegistrationStatusEnum.REVIEW
+      admissionDate: data.admissionDate
     });
-    await createRegistration(registration);
-    reset();
-    goToHome();
+    const actionStatus = await createRegistration(registration);
+    if (actionStatus === ActionStatus.SUCCESS) {
+      reset();
+      goToHome();
+    }
   });
 
   return (
@@ -52,6 +58,7 @@ export const NewUserPage = () => {
           id="name"
           placeholder="Nome"
           label="Nome"
+          error={errors.name?.message}
           {...register('name', {
             validate: EmployeeNameValidation.validate
           })}
@@ -61,6 +68,7 @@ export const NewUserPage = () => {
           placeholder="Email"
           label="Email"
           type="email"
+          error={errors.email?.message}
           {...register('email', {
             validate: EmailValidation.validate
           })}
@@ -69,6 +77,7 @@ export const NewUserPage = () => {
           id="cpf"
           placeholder="CPF"
           label="CPF"
+          error={errors.cpf?.message}
           {...register('cpf', {
             validate: CpfValidation.validate
           })}
@@ -77,7 +86,13 @@ export const NewUserPage = () => {
           id="admission-date"
           label="Data de admissão"
           type="date"
-          {...register('admissionDate', { required: true })}
+          error={errors.admissionDate?.message}
+          {...register('admissionDate', {
+            required: {
+              value: true,
+              message: 'Data de admissão é obrigatória'
+            }
+          })}
         />
         <Button type="submit">Cadastrar</Button>
       </S.Card>

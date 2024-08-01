@@ -24,7 +24,7 @@ export class EmployeeNameDontHaveMoreThanOneNameError extends Error {
 
 export class EmployeeName {
   constructor(readonly value: string) {
-    const names = value.split(' ');
+    const names = value.trim().split(' ');
     this.validateHaveMoreThanOneName(names);
     this.validateHasEmptyName(names);
     this.validateFirstLetterIsNumber(names);
