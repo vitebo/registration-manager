@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 import { Button, IconButton } from '~/components/Buttons';
 import { TextField } from '~/components/TextField';
-import { DiContext, StoreContext } from '~/contexts';
+import { RegistrationStoreContext } from '~/contexts';
 import { Registration, RegistrationStatusEnum } from '~/entities';
 import { routes } from '~/router';
 import { CpfValidation, EmailValidation, EmployeeNameValidation } from '~/validations';
@@ -27,19 +27,17 @@ export const NewUserPage = () => {
 
   const { register, handleSubmit, reset } = useForm<FormValues>();
 
-  const { registrationGateway } = useContext(DiContext);
-  const { registrations, setRegistrations } = useContext(StoreContext);
+  const { createRegistration } = useContext(RegistrationStoreContext);
 
   const onSubmit = handleSubmit(async (data) => {
-    const registrationData = new Registration({
+    const registration = new Registration({
       employeeName: data.name,
       cpf: data.cpf,
       email: data.email,
       admissionDate: data.admissionDate,
       status: RegistrationStatusEnum.REVIEW
     });
-    const registration = await registrationGateway.create(registrationData);
-    setRegistrations([...registrations, registration]);
+    await createRegistration(registration);
     reset();
     goToHome();
   });

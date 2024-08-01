@@ -1,25 +1,19 @@
 import { useEffect, useContext } from 'react';
 
-import { DiContext, StoreContext } from '~/contexts';
+import { RegistrationStoreContext } from '~/contexts';
 
 import { SearchBar, Collumns } from './components';
 import * as S from './styles';
 
 export const Dashboard = () => {
-  const { registrations, setRegistrations } = useContext(StoreContext);
-  const { registrationGateway } = useContext(DiContext);
+  const { registrations, fetchAllRegistrations } = useContext(RegistrationStoreContext);
 
   useEffect(() => {
-    const fetchRegistrations = async () => {
-      const registrations = await registrationGateway.get();
-      setRegistrations(registrations);
-    };
-    fetchRegistrations();
-  }, [registrationGateway, setRegistrations]);
+    fetchAllRegistrations().then();
+  }, [fetchAllRegistrations]);
 
   async function handleRefreshRegistrations() {
-    const newRegistrations = await registrationGateway.get();
-    setRegistrations(newRegistrations);
+    await fetchAllRegistrations();
   }
 
   return (
