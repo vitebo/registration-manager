@@ -5,9 +5,8 @@ import { useHookFormMask } from 'use-mask-input';
 
 import { Button, IconButton } from '~/components/Buttons';
 import { TextField } from '~/components/TextField';
-import { ActionStatus } from '~/constants';
 import { Registration } from '~/entities';
-import { useCreateRegistration } from '~/hooks';
+import { useRegistration } from '~/hooks';
 import { routes } from '~/router';
 import { CpfValidation, EmailValidation, EmployeeNameValidation } from '~/validations';
 
@@ -22,6 +21,8 @@ type FormValues = {
 
 export const NewUserPage = () => {
   const history = useHistory();
+  const { createRegistration, ActionStatus } = useRegistration();
+
   const goToHome = () => {
     history.push(routes.dashboard);
   };
@@ -34,8 +35,6 @@ export const NewUserPage = () => {
   } = useForm<FormValues>();
 
   const registerWithMask = useHookFormMask(register);
-
-  const createRegistration = useCreateRegistration();
 
   const onSubmit = handleSubmit(async (data) => {
     const registration = new Registration({

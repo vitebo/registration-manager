@@ -1,40 +1,50 @@
-import { useContext, useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { RegistrationStoreContext } from '~/contexts';
-import { Cpf } from '~/entities';
+import { Cpf, RegistrationStatusEnum } from '~/entities';
+import { useRegistration } from '~/hooks';
 import { routes } from '~/router';
 
-import { SearchBar, Collumns } from './components';
+import { SearchBar, Collumns, Column, RegistrationCard } from './components';
 import * as S from './styles';
 
+const allColumns = [
+  { status: RegistrationStatusEnum.REVIEW, title: 'Pronto para revisar' },
+  { status: RegistrationStatusEnum.APPROVED, title: 'Aprovado' },
+  { status: RegistrationStatusEnum.REPROVED, title: 'Reprovado' }
+];
+
 export const Dashboard = () => {
-  const { registrations, fetchAllRegistrations, findRegistrationByCpf, isLoading } =
-    useContext(RegistrationStoreContext);
+  const {
+    registrations,
+    isLoading,
+    fetchRegistrations,
+    reproveRegistration,
+    reviewRegistration,
+    deleteRegistration,
+    approveRegistration
+  } = useRegistration();
 
   const history = useHistory();
 
   useEffect(() => {
-    fetchAllRegistrations().then();
-  }, [fetchAllRegistrations]);
+    fetchRegistrations().then();
+  }, []);
 
   const handleRefreshRegistrations = useCallback(async () => {
-    await fetchAllRegistrations();
-  }, [fetchAllRegistrations]);
+    await fetchRegistrations();
+  }, [fetchRegistrations]);
 
   const handleValidCpf = useCallback(
-    async (cpf: string) => {
-      if (cpf) {
-        return await findRegistrationByCpf(new Cpf(cpf)).then();
-      }
-      await fetchAllRegistrations();
+    async (cpf: Cpf) => {
+      await fetchRegistrations(cpf).then();
     },
-    [fetchAllRegistrations, findRegistrationByCpf]
+    [fetchRegistrations]
   );
 
-  const handleGoToNewAdmissionPage = () => {
+  const handleGoToNewAdmissionPage = useCallback(() => {
     history.push(routes.newUser);
-  };
+  }, [history]);
 
   return (
     <S.Container>
@@ -43,7 +53,30 @@ export const Dashboard = () => {
         onValidCpf={handleValidCpf}
         onGoToNewAdmissionPage={handleGoToNewAdmissionPage}
       />
-      {isLoading ? <p>Loading</p> : <Collumns registrations={registrations} />}
+      {isLoading ? (
+        <p>Loading</p>
+      ) : (
+        <Collumns>
+          {allColumns.map((collum) => (
+            <Column key={collum.status} status={collum.status} title={collum.title}>
+              {registrations
+                .filter((registration) => registration.status.value === collum.status)
+                .map((registration) => {
+                  return (
+                    <RegistrationCard
+                      registration={registration}
+                      key={registration.id}
+                      onApprove={() => approveRegistration(registration)}
+                      onReprove={() => reproveRegistration(registration)}
+                      onReview={() => reviewRegistration(registration)}
+                      onDelete={() => deleteRegistration(registration)}
+                    />
+                  );
+                })}
+            </Column>
+          ))}
+        </Collumns>
+      )}
     </S.Container>
   );
 };

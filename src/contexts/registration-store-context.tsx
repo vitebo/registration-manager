@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState, useCallback } from 'react';
+import { createContext, ReactNode, useContext, useState } from 'react';
 
 import { DiContext } from '~/contexts';
 import { Cpf, Registration } from '~/entities';
@@ -37,18 +37,6 @@ export const RegistrationStoreProvider = ({ children }: RegistrationStoreProvide
 
   const { registrationGateway } = useContext(DiContext);
 
-  const updateRegistration = useCallback(
-    async (registration: Registration) => {
-      const updatedRegistration = await registrationGateway.update(registration);
-      setRegistrations(
-        registrations.map((registration) =>
-          registration.id === updatedRegistration.id ? updatedRegistration : registration
-        )
-      );
-    },
-    [registrationGateway, registrations]
-  );
-
   async function executeWithLoading<T>(action: () => Promise<T>): Promise<T> {
     setIsLoading(true);
     const value = await action();
@@ -56,62 +44,53 @@ export const RegistrationStoreProvider = ({ children }: RegistrationStoreProvide
     return value;
   }
 
-  const fetchAllRegistrations = useCallback(async () => {
+  async function updateRegistration(registration: Registration) {
+    const updatedRegistration = await registrationGateway.update(registration);
+    setRegistrations(
+      registrations.map((registration) =>
+        registration.id === updatedRegistration.id ? updatedRegistration : registration
+      )
+    );
+  }
+
+  async function fetchAllRegistrations() {
     setRegistrations([]);
     const registrations = await executeWithLoading(() => registrationGateway.getAll());
     setRegistrations(registrations);
-  }, [registrationGateway]);
+  }
 
-  const approveRegistration = useCallback(
-    async (registration: Registration) => {
-      registration.status.approve();
-      await executeWithLoading(() => updateRegistration(registration));
-    },
-    [updateRegistration]
-  );
+  async function approveRegistration(registration: Registration) {
+    registration.status.approve();
+    await executeWithLoading(() => updateRegistration(registration));
+  }
 
-  const reproveRegistration = useCallback(
-    async (registration: Registration) => {
-      registration.status.reprove();
-      await executeWithLoading(() => updateRegistration(registration));
-    },
-    [updateRegistration]
-  );
+  async function reproveRegistration(registration: Registration) {
+    registration.status.reprove();
+    await executeWithLoading(() => updateRegistration(registration));
+  }
 
-  const reviewRegistration = useCallback(
-    async (registration: Registration) => {
-      registration.status.review();
-      await executeWithLoading(() => updateRegistration(registration));
-    },
-    [updateRegistration]
-  );
+  async function reviewRegistration(registration: Registration) {
+    registration.status.review();
+    await executeWithLoading(() => updateRegistration(registration));
+  }
 
-  const deleteRegistration = useCallback(
-    async (registration: Registration) => {
-      await executeWithLoading(() => registrationGateway.delete(registration));
-      setRegistrations(registrations.filter((reg) => reg.id !== registration.id));
-    },
-    [registrationGateway, registrations]
-  );
+  async function deleteRegistration(registration: Registration) {
+    await executeWithLoading(() => registrationGateway.delete(registration));
+    setRegistrations(registrations.filter((reg) => reg.id !== registration.id));
+  }
 
-  const createRegistration = useCallback(
-    async (registration: Registration) => {
-      const updatedRegistration = await executeWithLoading(() => registrationGateway.create(registration));
-      setRegistrations([...registrations, updatedRegistration]);
-    },
-    [registrationGateway, registrations]
-  );
+  async function createRegistration(registration: Registration) {
+    const updatedRegistration = await executeWithLoading(() => registrationGateway.create(registration));
+    setRegistrations([...registrations, updatedRegistration]);
+  }
 
-  const findRegistrationByCpf = useCallback(
-    async (cpf: Cpf) => {
-      setRegistrations([]);
-      const registration = await executeWithLoading(() => registrationGateway.findByCpf(cpf));
-      if (registration) {
-        setRegistrations([registration]);
-      }
-    },
-    [registrationGateway]
-  );
+  async function findRegistrationByCpf(cpf: Cpf) {
+    setRegistrations([]);
+    const registration = await executeWithLoading(() => registrationGateway.findByCpf(cpf));
+    if (registration) {
+      setRegistrations([registration]);
+    }
+  }
 
   return (
     <RegistrationStoreContext.Provider

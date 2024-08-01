@@ -2,18 +2,18 @@ import { HiOutlineMail, HiOutlineUser, HiOutlineCalendar, HiOutlineTrash } from 
 
 import { ButtonSmall } from '~/components/Buttons';
 import { Registration, RegistrationStatusEnum } from '~/entities';
-import { useUpdateRegistrationStatus, useDeleteRegistration } from '~/hooks';
 
 import * as S from './styles';
 
-type Props = {
+interface RegistrationCardProps {
   registration: Registration;
-};
+  onApprove: () => void;
+  onReprove: () => void;
+  onReview: () => void;
+  onDelete: () => void;
+}
 
-export const RegistrationCard = ({ registration }: Props) => {
-  const registrationUpdateStatus = useUpdateRegistrationStatus();
-  const deleteRegistration = useDeleteRegistration();
-
+export const RegistrationCard = ({ registration, onDelete, onReview, onReprove, onApprove }: RegistrationCardProps) => {
   return (
     <S.Card>
       <S.IconAndText>
@@ -30,21 +30,21 @@ export const RegistrationCard = ({ registration }: Props) => {
       </S.IconAndText>
       <S.Actions>
         {registration.status.canUpdate(RegistrationStatusEnum.REPROVED) && (
-          <ButtonSmall bgcolor="rgb(255, 145, 154)" onClick={() => registrationUpdateStatus.reprove(registration)}>
+          <ButtonSmall bgcolor="rgb(255, 145, 154)" onClick={onReprove}>
             Reprovar
           </ButtonSmall>
         )}
         {registration.status.canUpdate(RegistrationStatusEnum.APPROVED) && (
-          <ButtonSmall bgcolor="rgb(155, 229, 155)" onClick={() => registrationUpdateStatus.approve(registration)}>
+          <ButtonSmall bgcolor="rgb(155, 229, 155)" onClick={onApprove}>
             Aprovar
           </ButtonSmall>
         )}
         {registration.status.canUpdate(RegistrationStatusEnum.REVIEW) && (
-          <ButtonSmall bgcolor="#ff8858" onClick={() => registrationUpdateStatus.review(registration)}>
+          <ButtonSmall bgcolor="#ff8858" onClick={onReview}>
             Revisar novamente
           </ButtonSmall>
         )}
-        <HiOutlineTrash onClick={() => deleteRegistration(registration)} />
+        <HiOutlineTrash onClick={onDelete} />
       </S.Actions>
     </S.Card>
   );

@@ -4,13 +4,14 @@ import { useHookFormMask } from 'use-mask-input';
 
 import { Button, IconButton } from '~/components/Buttons';
 import { TextField } from '~/components/TextField';
+import { Cpf } from '~/entities';
 import { CpfValidation } from '~/validations';
 
 import * as S from './styles';
 
 interface SearchBarProps {
   onClickRefresh: () => void;
-  onValidCpf: (cpf: string) => void;
+  onValidCpf: (cpf: Cpf) => void;
   onGoToNewAdmissionPage: () => void;
 }
 
@@ -41,7 +42,7 @@ export const SearchBar = ({ onClickRefresh, onValidCpf, onGoToNewAdmissionPage }
     if (!cpf) return;
     const messageError = CpfValidation.validate(cpf);
     if (!messageError) {
-      onValidCpf(cpf);
+      onValidCpf(new Cpf(cpf));
     }
     if (touchedFields.cpf) {
       return messageError;
