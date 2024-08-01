@@ -13,12 +13,22 @@ const Input = styled.input`
   line-height: 18px;
   font-weight: normal;
   border-radius: 8px;
-  :focus {
+  &:focus {
     outline: none;
     border: 1px solid #007c89;
     box-shadow: inset 0 0 0 1px #007c89;
   }
+  &:invalid,
+  &[aria-invalid='true'] {
+    border: 1px solid #b91c1c;
+  }
 `;
+
+const Error = styled.span`
+  font-size: 12px;
+  color: #b91c1c;
+`;
+
 type Props = {
   label?: string;
   error?: string;
@@ -28,8 +38,8 @@ export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
   return (
     <div>
       <label htmlFor={props.id}>{props.label}</label>
-      <Input ref={ref} {...props} />
-      <span style={{ fontSize: 12, color: 'red' }}>{props.error}</span>
+      <Input ref={ref} aria-invalid={props.error ? 'true' : 'false'} {...props} />
+      <Error>{props.error}</Error>
     </div>
   );
 });
