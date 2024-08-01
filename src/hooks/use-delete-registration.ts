@@ -2,12 +2,13 @@ import { useContext } from 'react';
 
 import { Confirm } from '~/components/Confirm';
 import { NotificationType } from '~/components/Notification';
-import { ModalContext, NotificationContext } from '~/contexts';
+import { ModalContext, NotificationContext, RegistrationStoreContext } from '~/contexts';
 import { Registration } from '~/entities';
 
 export function useDeleteRegistration() {
   const { openModal, closeModal } = useContext(ModalContext);
   const { addNotification } = useContext(NotificationContext);
+  const { deleteRegistration: storeDeleteRegistration } = useContext(RegistrationStoreContext);
 
   return async function deleteRegistration(registration: Registration) {
     openModal(
@@ -16,7 +17,7 @@ export function useDeleteRegistration() {
         message: `Deseja realmente excluir o cadastro de ${registration.employeeName.value}?`,
         onConfirm: async () => {
           try {
-            await deleteRegistration(registration);
+            await storeDeleteRegistration(registration);
             addNotification({
               type: NotificationType.SUCCESS,
               message: 'Cadastro excluído com sucesso!'
