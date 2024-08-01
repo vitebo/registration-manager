@@ -8,16 +8,16 @@ import { Registration } from '~/entities';
 export function useDeleteRegistration() {
   const { openModal, closeModal } = useContext(ModalContext);
   const { addNotification } = useContext(NotificationContext);
-  const { deleteRegistration: storeDeleteRegistration } = useContext(RegistrationStoreContext);
+  const { deleteRegistration } = useContext(RegistrationStoreContext);
 
-  return async function deleteRegistration(registration: Registration) {
+  return async (registration: Registration) => {
     openModal(
       Confirm({
         title: 'Excluir cadastro',
         message: `Deseja realmente excluir o cadastro de ${registration.employeeName.value}?`,
         onConfirm: async () => {
           try {
-            await storeDeleteRegistration(registration);
+            await deleteRegistration(registration);
             addNotification({
               type: NotificationType.SUCCESS,
               message: 'Cadastro excluído com sucesso!'
