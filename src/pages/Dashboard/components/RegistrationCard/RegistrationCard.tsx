@@ -26,7 +26,7 @@ export const RegistrationCard = ({ registration }: Props) => {
       </S.IconAndText>
       <S.IconAndText>
         <HiOutlineCalendar />
-        <span>{registration.admissionDate.toString()}</span>
+        <span>{registration.adminssionDateFormated}</span>
       </S.IconAndText>
       <S.Actions>
         {registration.status.canUpdate(RegistrationStatusEnum.REPROVED) && (

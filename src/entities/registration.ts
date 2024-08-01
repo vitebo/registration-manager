@@ -32,12 +32,20 @@ export class Registration {
     this.employeeName = new EmployeeName(employeeName);
     this.cpf = new Cpf(cpf);
     this.email = new Email(email);
-    this.admissionDate = admissionDate;
+    this.admissionDate = new Date(admissionDate);
 
     if (id) {
       this.status = RegistrationStatusFactory.create(status, this);
     } else {
       this.status = RegistrationStatusFactory.create(RegistrationStatusEnum.REVIEW, this);
     }
+  }
+
+  get adminssionDateFormated() {
+    return this.admissionDate.toLocaleDateString('pt-BR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    });
   }
 }

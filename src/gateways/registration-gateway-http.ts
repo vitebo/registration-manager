@@ -1,42 +1,21 @@
 import { HttpClient } from '~/drivers';
-import { RegistrationStatusEnum, Registration, Cpf } from '~/entities';
+import { Registration, Cpf } from '~/entities';
+import { HttpRegistrationMapper } from '~/mappers';
 
 import { RegistrationGateway } from './registration-gateway';
-
-interface RegistrationData {
-  id: string;
-  employeeName: string;
-  cpf: string;
-  email: string;
-  admissionDate: string;
-  status: keyof typeof RegistrationStatusEnum;
-}
 
 export class RegistrationGatewayHttp implements RegistrationGateway {
   constructor(private readonly httpClient: HttpClient) {}
 
   async create(registration: Registration): Promise<Registration> {
-    const data = await this.httpClient.post<RegistrationData>(
+    const raw = await this.httpClient.post(
       'http://localhost:3000/registrations',
-      {
-        employeeName: registration.employeeName.value,
-        cpf: registration.cpf.value,
-        email: registration.email.value,
-        admissionDate: registration.admissionDate.toString(),
-        status: registration.status.value
-      },
+      HttpRegistrationMapper.toHttp(registration),
       new Headers({
         'Content-Type': 'application/json'
       })
     );
-    const newRegistration = new Registration({
-      id: data.id,
-      employeeName: data.employeeName,
-      cpf: data.cpf,
-      email: data.email,
-      admissionDate: new Date(data.admissionDate),
-      status: data.status
-    });
+    const newRegistration = HttpRegistrationMapper.toDomain(raw);
     return Promise.resolve(newRegistration);
   }
 
@@ -46,61 +25,30 @@ export class RegistrationGatewayHttp implements RegistrationGateway {
 
   async getAll(): Promise<Registration[]> {
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    const data = await this.httpClient.get<RegistrationData[]>('http://localhost:3000/registrations', new Headers());
-    const registrations = data.map((registration: any) => {
-      return new Registration({
-        id: registration.id,
-        employeeName: registration.employeeName,
-        cpf: registration.cpf,
-        email: registration.email,
-        admissionDate: registration.admissionDate,
-        status: registration.status
-      });
-    });
+    const rawList = await this.httpClient.get<unknown[]>('http://localhost:3000/registrations', new Headers());
+    const registrations = rawList.map((raw) => HttpRegistrationMapper.toDomain(raw));
     return Promise.resolve(registrations);
   }
 
   async update(registration: Registration): Promise<Registration> {
-    const data = await this.httpClient.put<RegistrationData>(
+    const raw = await this.httpClient.put(
       `http://localhost:3000/registrations/${registration.id}`,
-      {
-        employeeName: registration.employeeName.value,
-        cpf: registration.cpf.value,
-        email: registration.email.value,
-        admissionDate: registration.admissionDate.toString(),
-        status: registration.status.value
-      },
+      HttpRegistrationMapper.toHttp(registration),
       new Headers({
         'Content-Type': 'application/json'
       })
     );
-    const updatedRegistration = new Registration({
-      id: data.id,
-      employeeName: data.employeeName,
-      cpf: data.cpf,
-      email: data.email,
-      admissionDate: new Date(data.admissionDate),
-      status: data.status
-    });
+    const updatedRegistration = HttpRegistrationMapper.toDomain(raw);
     return Promise.resolve(updatedRegistration);
   }
 
   async findByCpf(cpf: Cpf): Promise<Registration | null> {
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    const data = await this.httpClient.get<RegistrationData[]>(
+    const rawList = await this.httpClient.get<unknown[]>(
       `http://localhost:3000/registrations?cpf=${cpf.value}`,
       new Headers()
     );
-    const registrations = data.map((registration: any) => {
-      return new Registration({
-        id: registration.id,
-        employeeName: registration.employeeName,
-        cpf: registration.cpf,
-        email: registration.email,
-        admissionDate: registration.admissionDate,
-        status: registration.status
-      });
-    });
+    const registrations = rawList.map((registration) => HttpRegistrationMapper.toDomain(registration));
     const registration = registrations.find((registration) => registration.cpf.value === cpf.value);
     return Promise.resolve(registration ?? null);
   }
