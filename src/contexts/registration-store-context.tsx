@@ -5,6 +5,7 @@ import { Registration } from '~/entities';
 
 interface RegistrationStoreContextValue {
   registrations: Registration[];
+  isLoading: boolean;
   fetchAllRegistrations: () => Promise<void>;
   approveRegistration: (registration: Registration) => Promise<void>;
   reproveRegistration: (registration: Registration) => Promise<void>;
@@ -19,6 +20,7 @@ interface RegistrationStoreProviderProps {
 
 export const RegistrationStoreContext = createContext<RegistrationStoreContextValue>({
   registrations: [],
+  isLoading: false,
   fetchAllRegistrations: () => Promise.resolve(),
   approveRegistration: () => Promise.resolve(),
   reproveRegistration: () => Promise.resolve(),
@@ -29,10 +31,11 @@ export const RegistrationStoreContext = createContext<RegistrationStoreContextVa
 
 export const RegistrationStoreProvider = ({ children }: RegistrationStoreProviderProps) => {
   const [registrations, setRegistrations] = useState<Registration[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { registrationGateway } = useContext(DiContext);
 
-  const _updateRegistration = useCallback(
+  const updateRegistration = useCallback(
     async (registration: Registration) => {
       const updatedRegistration = await registrationGateway.update(registration);
       setRegistrations(
@@ -44,39 +47,46 @@ export const RegistrationStoreProvider = ({ children }: RegistrationStoreProvide
     [registrationGateway, registrations]
   );
 
+  async function executeWithLoading<T>(action: () => Promise<T>): Promise<T> {
+    setIsLoading(true);
+    const value = await action();
+    setIsLoading(false);
+    return value;
+  }
+
   const fetchAllRegistrations = useCallback(async () => {
     setRegistrations([]);
-    const registrations = await registrationGateway.get();
+    const registrations = await executeWithLoading(() => registrationGateway.get());
     setRegistrations(registrations);
   }, [registrationGateway]);
 
   const approveRegistration = useCallback(
     async (registration: Registration) => {
       registration.status.approve();
-      await _updateRegistration(registration);
+      await executeWithLoading(() => updateRegistration(registration));
     },
-    [_updateRegistration]
+    [updateRegistration]
   );
 
   const reproveRegistration = useCallback(
     async (registration: Registration) => {
       registration.status.reprove();
-      await _updateRegistration(registration);
+      await executeWithLoading(() => updateRegistration(registration));
     },
-    [_updateRegistration]
+    [updateRegistration]
   );
 
   const reviewRegistration = useCallback(
     async (registration: Registration) => {
       registration.status.review();
-      await _updateRegistration(registration);
+      await executeWithLoading(() => updateRegistration(registration));
     },
-    [_updateRegistration]
+    [updateRegistration]
   );
 
   const deleteRegistration = useCallback(
     async (registration: Registration) => {
-      await registrationGateway.delete(registration);
+      await executeWithLoading(() => registrationGateway.delete(registration));
       setRegistrations(registrations.filter((reg) => reg.id !== registration.id));
     },
     [registrationGateway, registrations]
@@ -84,7 +94,7 @@ export const RegistrationStoreProvider = ({ children }: RegistrationStoreProvide
 
   const createRegistration = useCallback(
     async (registration: Registration) => {
-      const updatedRegistration = await registrationGateway.create(registration);
+      const updatedRegistration = await executeWithLoading(() => registrationGateway.create(registration));
       setRegistrations([...registrations, updatedRegistration]);
     },
     [registrationGateway, registrations]
@@ -94,6 +104,7 @@ export const RegistrationStoreProvider = ({ children }: RegistrationStoreProvide
     <RegistrationStoreContext.Provider
       value={{
         registrations,
+        isLoading,
         approveRegistration,
         createRegistration,
         deleteRegistration,

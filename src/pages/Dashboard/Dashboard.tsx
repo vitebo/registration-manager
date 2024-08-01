@@ -6,7 +6,7 @@ import { SearchBar, Collumns } from './components';
 import * as S from './styles';
 
 export const Dashboard = () => {
-  const { registrations, fetchAllRegistrations } = useContext(RegistrationStoreContext);
+  const { registrations, fetchAllRegistrations, isLoading } = useContext(RegistrationStoreContext);
 
   useEffect(() => {
     fetchAllRegistrations().then();
@@ -19,7 +19,7 @@ export const Dashboard = () => {
   return (
     <S.Container>
       <SearchBar onClickRefresh={handleRefreshRegistrations} />
-      <Collumns registrations={registrations} />
+      {isLoading ? <p>Loading</p> : <Collumns registrations={registrations} />}
     </S.Container>
   );
 };
