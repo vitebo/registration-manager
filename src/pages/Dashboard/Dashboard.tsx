@@ -53,30 +53,26 @@ export const Dashboard = () => {
         onValidCpf={handleValidCpf}
         onGoToNewAdmissionPage={handleGoToNewAdmissionPage}
       />
-      {isLoading ? (
-        <p>Loading</p>
-      ) : (
-        <Collumns>
-          {allColumns.map((collum) => (
-            <Column key={collum.status} status={collum.status} title={collum.title}>
-              {registrations
-                .filter((registration) => registration.status.value === collum.status)
-                .map((registration) => {
-                  return (
-                    <RegistrationCard
-                      registration={registration}
-                      key={registration.id}
-                      onApprove={() => approveRegistration(registration)}
-                      onReprove={() => reproveRegistration(registration)}
-                      onReview={() => reviewRegistration(registration)}
-                      onDelete={() => deleteRegistration(registration)}
-                    />
-                  );
-                })}
-            </Column>
-          ))}
-        </Collumns>
-      )}
+      <Collumns>
+        {allColumns.map((collum) => (
+          <Column key={collum.status} status={collum.status} title={collum.title} isLoading={isLoading}>
+            {registrations
+              .filter((registration) => registration.status.value === collum.status)
+              .map((registration) => {
+                return (
+                  <RegistrationCard
+                    registration={registration}
+                    key={registration.id}
+                    onApprove={() => approveRegistration(registration)}
+                    onReprove={() => reproveRegistration(registration)}
+                    onReview={() => reviewRegistration(registration)}
+                    onDelete={() => deleteRegistration(registration)}
+                  />
+                );
+              })}
+          </Column>
+        ))}
+      </Collumns>
     </S.Container>
   );
 };

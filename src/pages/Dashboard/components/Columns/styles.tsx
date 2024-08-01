@@ -31,12 +31,27 @@ export const Column = styled.div<{ status: any }>`
   border-radius: 32px;
   min-height: 80vh;
   max-height: 80vh;
+
+  &.loading {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+
+    @keyframes loading {
+      to {
+        background-position: -200% 0;
+      }
+    }
+  }
 `;
 
 export const TitleColumn = styled.h3<{ status: any }>`
-  margin: 0px;
   color: ${({ status }) => registrationStatusStyles[status].title};
   margin: 24px;
+
+  &.loading {
+    color: #64748b;
+  }
 `;
 
 export const CollumContent = styled.div`
