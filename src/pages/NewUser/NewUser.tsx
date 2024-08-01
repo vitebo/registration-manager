@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { HiOutlineArrowLeft } from 'react-icons/hi';
 import { useHistory } from 'react-router-dom';
+import { useHookFormMask } from 'use-mask-input';
 
 import { Button, IconButton } from '~/components/Buttons';
 import { TextField } from '~/components/TextField';
@@ -31,6 +32,8 @@ export const NewUserPage = () => {
     reset,
     formState: { errors }
   } = useForm<FormValues>();
+
+  const registerWithMask = useHookFormMask(register);
 
   const createRegistration = useCreateRegistration();
 
@@ -69,7 +72,7 @@ export const NewUserPage = () => {
           label="Email"
           type="email"
           error={errors.email?.message}
-          {...register('email', {
+          {...registerWithMask('email', 'email', {
             validate: EmailValidation.validate
           })}
         />
@@ -78,7 +81,7 @@ export const NewUserPage = () => {
           placeholder="CPF"
           label="CPF"
           error={errors.cpf?.message}
-          {...register('cpf', {
+          {...registerWithMask('cpf', 'cpf', {
             validate: CpfValidation.validate
           })}
         />
@@ -87,7 +90,7 @@ export const NewUserPage = () => {
           label="Data de admissão"
           type="date"
           error={errors.admissionDate?.message}
-          {...register('admissionDate', {
+          {...registerWithMask('admissionDate', 'datetime', {
             required: {
               value: true,
               message: 'Data de admissão é obrigatória'
