@@ -1,41 +1,43 @@
-import { useContext, useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { HiOutlineX } from 'react-icons/hi';
-
-import { ModalContext } from '~/contexts';
 
 import * as S from './styles';
 
-export const Modal = () => {
-  const { modalContent, isModalOpen, closeModal } = useContext(ModalContext);
+interface ModalProps {
+  onClose: () => void;
+  isOpen: boolean;
+  content: ReactNode;
+}
 
+export const Modal = ({ onClose, isOpen, content }: ModalProps) => {
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        closeModal();
+        onClose();
       }
     };
     document.addEventListener('keydown', handleEscape);
     return () => {
       document.removeEventListener('keydown', handleEscape);
     };
-  }, []);
+  }, [onClose]);
 
   function handleClickOverlay(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     event.stopPropagation();
     if (event.target === event.currentTarget) {
-      closeModal();
+      onClose();
     }
   }
 
-  if (!isModalOpen) return null;
+  if (!isOpen) return null;
 
   return (
     <S.Overlay onClick={handleClickOverlay}>
       <S.Card>
-        <S.CloseButton onClick={() => closeModal()}>
+        <S.CloseButton onClick={() => onClose()}>
           <HiOutlineX />
         </S.CloseButton>
-        <S.Content>{modalContent}</S.Content>
+        <S.Content>{content}</S.Content>
       </S.Card>
     </S.Overlay>
   );

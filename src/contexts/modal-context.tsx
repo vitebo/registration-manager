@@ -39,7 +39,10 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
   return (
     <ModalContext.Provider value={{ isModalOpen, closeModal, openModal, modalContent }}>
       {children}
-      {createPortal(<Modal />, document.getElementById(MODAL_ROOT_ELEMENT_ID) as HTMLElement)}
+      {createPortal(
+        <Modal isOpen={isModalOpen} onClose={closeModal} content={modalContent} />,
+        document.getElementById(MODAL_ROOT_ELEMENT_ID) as HTMLElement
+      )}
     </ModalContext.Provider>
   );
 };
