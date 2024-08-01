@@ -37,10 +37,14 @@ export const Dashboard = () => {
 
   const handleValidCpf = useCallback(
     async (cpf: Cpf) => {
-      await fetchRegistrations(cpf).then();
+      await fetchRegistrations(cpf);
     },
     [fetchRegistrations]
   );
+
+  const handleCleanCpf = useCallback(async () => {
+    await fetchRegistrations();
+  }, [fetchRegistrations]);
 
   const handleGoToNewAdmissionPage = useCallback(() => {
     history.push(routes.newUser);
@@ -51,6 +55,7 @@ export const Dashboard = () => {
       <SearchBar
         onClickRefresh={handleRefreshRegistrations}
         onValidCpf={handleValidCpf}
+        onCleanCpf={handleCleanCpf}
         onGoToNewAdmissionPage={handleGoToNewAdmissionPage}
       />
       <Collumns>

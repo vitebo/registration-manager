@@ -12,6 +12,7 @@ import * as S from './styles';
 interface SearchBarProps {
   onClickRefresh: () => void;
   onValidCpf: (cpf: Cpf) => void;
+  onCleanCpf: () => void;
   onGoToNewAdmissionPage: () => void;
 }
 
@@ -19,7 +20,7 @@ type FormValues = {
   cpf: string;
 };
 
-export const SearchBar = ({ onClickRefresh, onValidCpf, onGoToNewAdmissionPage }: SearchBarProps) => {
+export const SearchBar = ({ onClickRefresh, onValidCpf, onGoToNewAdmissionPage, onCleanCpf }: SearchBarProps) => {
   const {
     register,
     formState: { errors },
@@ -39,7 +40,10 @@ export const SearchBar = ({ onClickRefresh, onValidCpf, onGoToNewAdmissionPage }
   }
 
   function onValidateCpf(cpf: string) {
-    if (!cpf) return;
+    if (!cpf) {
+      onCleanCpf();
+      return;
+    }
     const messageError = CpfValidation.validate(cpf);
     if (!messageError) {
       onValidCpf(new Cpf(cpf));
