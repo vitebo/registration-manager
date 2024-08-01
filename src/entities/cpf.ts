@@ -23,13 +23,20 @@ export class CpfFormatError extends Error {
 }
 
 export class Cpf {
-  static LENGTH = 11;
+  static readonly LENGTH = 11;
+  readonly value: string;
 
-  constructor(readonly value: string) {
-    this.validateIsEmpty(value);
-    this.validateLength(value);
-    this.validateAllDigitsAreTheSame(value);
-    this.validateFormat(value);
+  constructor(value: string) {
+    const cleanValue = this.clean(value);
+    this.validateIsEmpty(cleanValue);
+    this.validateLength(cleanValue);
+    this.validateAllDigitsAreTheSame(cleanValue);
+    this.validateFormat(cleanValue);
+    this.value = cleanValue;
+  }
+
+  private clean(cpf: string) {
+    return cpf.replace(/\D/g, '');
   }
 
   private validateIsEmpty(cpf: string) {

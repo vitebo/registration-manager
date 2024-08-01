@@ -1,5 +1,5 @@
 import { HttpClient } from '~/drivers';
-import { RegistrationStatusEnum, Registration } from '~/entities';
+import { RegistrationStatusEnum, Registration, Cpf } from '~/entities';
 
 import { RegistrationGateway } from './registration-gateway';
 
@@ -83,5 +83,25 @@ export class RegistrationGatewayHttp implements RegistrationGateway {
       status: data.status
     });
     return Promise.resolve(updatedRegistration);
+  }
+
+  async findByCpf(cpf: Cpf): Promise<Registration | null> {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const data = await this.httpClient.get<RegistrationData[]>(
+      `http://localhost:3000/registrations?cpf=${cpf.value}`,
+      new Headers()
+    );
+    const registrations = data.map((registration: any) => {
+      return new Registration({
+        id: registration.id,
+        employeeName: registration.employeeName,
+        cpf: registration.cpf,
+        email: registration.email,
+        admissionDate: registration.admissionDate,
+        status: registration.status
+      });
+    });
+    const registration = registrations.find((registration) => registration.cpf.value === cpf.value);
+    return Promise.resolve(registration ?? null);
   }
 }

@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useState, useCallback } from 'react';
 
 import { DiContext } from '~/contexts';
-import { Registration } from '~/entities';
+import { Cpf, Registration } from '~/entities';
 
 interface RegistrationStoreContextValue {
   registrations: Registration[];
@@ -12,6 +12,7 @@ interface RegistrationStoreContextValue {
   reviewRegistration: (registration: Registration) => Promise<void>;
   deleteRegistration: (registration: Registration) => Promise<void>;
   createRegistration: (registration: Registration) => Promise<void>;
+  findRegistrationByCpf: (cpf: Cpf) => Promise<void>;
 }
 
 interface RegistrationStoreProviderProps {
@@ -26,7 +27,8 @@ export const RegistrationStoreContext = createContext<RegistrationStoreContextVa
   reproveRegistration: () => Promise.resolve(),
   reviewRegistration: () => Promise.resolve(),
   deleteRegistration: () => Promise.resolve(),
-  createRegistration: () => Promise.resolve()
+  createRegistration: () => Promise.resolve(),
+  findRegistrationByCpf: () => Promise.resolve()
 });
 
 export const RegistrationStoreProvider = ({ children }: RegistrationStoreProviderProps) => {
@@ -100,6 +102,17 @@ export const RegistrationStoreProvider = ({ children }: RegistrationStoreProvide
     [registrationGateway, registrations]
   );
 
+  const findRegistrationByCpf = useCallback(
+    async (cpf: Cpf) => {
+      setRegistrations([]);
+      const registration = await executeWithLoading(() => registrationGateway.findByCpf(cpf));
+      if (registration) {
+        setRegistrations([registration]);
+      }
+    },
+    [registrationGateway]
+  );
+
   return (
     <RegistrationStoreContext.Provider
       value={{
@@ -110,7 +123,8 @@ export const RegistrationStoreProvider = ({ children }: RegistrationStoreProvide
         deleteRegistration,
         fetchAllRegistrations,
         reproveRegistration,
-        reviewRegistration
+        reviewRegistration,
+        findRegistrationByCpf
       }}
     >
       {children}

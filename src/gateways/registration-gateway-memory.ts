@@ -1,4 +1,4 @@
-import { Registration } from '~/entities';
+import { Cpf, Registration } from '~/entities';
 
 import { RegistrationGateway } from './registration-gateway';
 
@@ -36,5 +36,10 @@ export class RegistrationGatewayMemory implements RegistrationGateway {
     const target = this.registrations.findIndex((item) => item.id === registration.id);
     this.registrations.splice(target, 1, registration);
     return Promise.resolve(registration);
+  }
+
+  findByCpf(cpf: Cpf): Promise<Registration | null> {
+    const registrationTarget = this.registrations.find((registration) => registration.cpf.value === cpf.value);
+    return Promise.resolve(registrationTarget ?? null);
   }
 }

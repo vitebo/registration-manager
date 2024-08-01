@@ -1,31 +1,68 @@
+import { useForm, useFormState } from 'react-hook-form';
 import { HiRefresh } from 'react-icons/hi';
-import { useHistory } from 'react-router-dom';
+import { useHookFormMask } from 'use-mask-input';
 
 import { Button, IconButton } from '~/components/Buttons';
 import { TextField } from '~/components/TextField';
-import { routes } from '~/router';
+import { CpfValidation } from '~/validations';
 
 import * as S from './styles';
 
 interface SearchBarProps {
   onClickRefresh: () => void;
+  onValidCpf: (cpf: string) => void;
+  onGoToNewAdmissionPage: () => void;
 }
 
-export const SearchBar = ({ onClickRefresh }: SearchBarProps) => {
-  const history = useHistory();
+type FormValues = {
+  cpf: string;
+};
 
-  const goToNewAdmissionPage = () => {
-    history.push(routes.newUser);
-  };
+export const SearchBar = ({ onClickRefresh, onValidCpf, onGoToNewAdmissionPage }: SearchBarProps) => {
+  const {
+    register,
+    formState: { errors },
+    resetField,
+    control
+  } = useForm<FormValues>({
+    mode: 'onChange'
+  });
+
+  const { touchedFields } = useFormState({ control });
+
+  const registerWithMask = useHookFormMask(register);
+
+  function handleRefresh() {
+    resetField('cpf');
+    onClickRefresh();
+  }
+
+  function onValidateCpf(cpf: string) {
+    if (!cpf) return;
+    const messageError = CpfValidation.validate(cpf);
+    if (!messageError) {
+      onValidCpf(cpf);
+    }
+    if (touchedFields.cpf) {
+      return messageError;
+    }
+  }
 
   return (
     <S.Container>
-      <TextField placeholder="Digite um CPF válido" />
+      <TextField
+        placeholder="Digite um CPF válido"
+        id="cpf"
+        error={errors.cpf?.message}
+        {...registerWithMask('cpf', 'cpf', {
+          validate: onValidateCpf
+        })}
+      />
       <S.Actions>
-        <IconButton aria-label="refetch" onClick={onClickRefresh}>
+        <IconButton aria-label="refetch" onClick={handleRefresh}>
           <HiRefresh />
         </IconButton>
-        <Button onClick={goToNewAdmissionPage}>Nova Admissão</Button>
+        <Button onClick={onGoToNewAdmissionPage}>Nova Admissão</Button>
       </S.Actions>
     </S.Container>
   );
