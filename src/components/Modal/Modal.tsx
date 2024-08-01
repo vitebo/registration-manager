@@ -1,6 +1,8 @@
 import { ReactNode, useEffect, MouseEvent } from 'react';
 import { HiOutlineX } from 'react-icons/hi';
 
+import { KEY_ESCAPE, KEYDOWN_EVENT_NAME } from '~/constants';
+
 import * as S from './styles';
 
 interface ModalProps {
@@ -12,13 +14,13 @@ interface ModalProps {
 export const Modal = ({ onClose, isOpen, content }: ModalProps) => {
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (event.key === KEY_ESCAPE) {
         onClose();
       }
     };
-    document.addEventListener('keydown', handleEscape);
+    document.addEventListener(KEYDOWN_EVENT_NAME, handleEscape);
     return () => {
-      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener(KEYDOWN_EVENT_NAME, handleEscape);
     };
   }, [onClose]);
 

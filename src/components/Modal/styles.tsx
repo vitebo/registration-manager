@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { IconButton } from '~/components/Buttons';
-
 export const Overlay = styled.div`
   background: rgba(242, 243, 245, 0.8);
 
@@ -29,14 +27,15 @@ export const Card = styled.div`
 
   padding: 24px;
   min-width: 320px;
-  min-height: 320px;
 `;
 
-export const CloseButton = styled(IconButton)`
+export const CloseButton = styled.button`
   position: absolute;
   top: 16px;
   right: 16px;
-  border-color: black;
+  background: transparent;
+  padding: 8px;
+  border: none;
   svg {
     color: black;
   }
