@@ -28,7 +28,7 @@ export class RegistrationGatewayMemory implements RegistrationGateway {
     return Promise.resolve(undefined);
   }
 
-  get(): Promise<Registration[]> {
+  getAll(): Promise<Registration[]> {
     return Promise.resolve(this.registrations);
   }
 

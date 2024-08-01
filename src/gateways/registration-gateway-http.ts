@@ -44,7 +44,7 @@ export class RegistrationGatewayHttp implements RegistrationGateway {
     return await this.httpClient.delete(`http://localhost:3000/registrations/${registration.id}`, new Headers());
   }
 
-  async get(): Promise<Registration[]> {
+  async getAll(): Promise<Registration[]> {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     const data = await this.httpClient.get<RegistrationData[]>('http://localhost:3000/registrations', new Headers());
     const registrations = data.map((registration: any) => {

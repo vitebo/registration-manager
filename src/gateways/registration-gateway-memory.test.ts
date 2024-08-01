@@ -4,7 +4,7 @@ import { RegistrationFactory } from '~~/test/factory';
 describe('Gateways > Registrations Memory', () => {
   it('starts with no registrations', async () => {
     const gateway = new RegistrationGatewayMemory();
-    const registrations = await gateway.get();
+    const registrations = await gateway.getAll();
     expect(registrations).toEqual([]);
   });
 
@@ -12,7 +12,7 @@ describe('Gateways > Registrations Memory', () => {
     const gateway = new RegistrationGatewayMemory();
     const registation = RegistrationFactory.create();
     await gateway.create(registation);
-    const registrations = await gateway.get();
+    const registrations = await gateway.getAll();
     expect(registrations).toEqual([registation]);
   });
 
@@ -21,7 +21,7 @@ describe('Gateways > Registrations Memory', () => {
     const registation = RegistrationFactory.create();
     await gateway.create(registation);
     await gateway.delete(registation);
-    const registrations = await gateway.get();
+    const registrations = await gateway.getAll();
     expect(registrations).toEqual([]);
   });
 
@@ -31,7 +31,7 @@ describe('Gateways > Registrations Memory', () => {
     await gateway.create(registation);
     const updatedRegistration = RegistrationFactory.create();
     await gateway.update(updatedRegistration);
-    const registrations = await gateway.get();
+    const registrations = await gateway.getAll();
     expect(registrations).toEqual([updatedRegistration]);
   });
 });

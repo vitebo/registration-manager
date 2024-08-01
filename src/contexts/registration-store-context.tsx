@@ -56,7 +56,7 @@ export const RegistrationStoreProvider = ({ children }: RegistrationStoreProvide
 
   const fetchAllRegistrations = useCallback(async () => {
     setRegistrations([]);
-    const registrations = await executeWithLoading(() => registrationGateway.get());
+    const registrations = await executeWithLoading(() => registrationGateway.getAll());
     setRegistrations(registrations);
   }, [registrationGateway]);
 
