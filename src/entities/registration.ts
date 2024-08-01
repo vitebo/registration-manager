@@ -9,7 +9,7 @@ interface RegistrationProps {
   cpf: string;
   email: string;
   admissionDate: Date;
-  status: keyof typeof RegistrationStatusEnum;
+  status?: keyof typeof RegistrationStatusEnum;
 }
 
 export class Registration {
@@ -20,12 +20,24 @@ export class Registration {
   public admissionDate: Date;
   public status: RegistrationStatus;
 
-  constructor({ id, employeeName, cpf, email, admissionDate, status }: RegistrationProps) {
+  constructor({
+    id,
+    employeeName,
+    cpf,
+    email,
+    admissionDate,
+    status = RegistrationStatusEnum.REVIEW
+  }: RegistrationProps) {
     this.id = id;
     this.employeeName = new EmployeeName(employeeName);
     this.cpf = new Cpf(cpf);
     this.email = new Email(email);
     this.admissionDate = admissionDate;
-    this.status = RegistrationStatusFactory.create(status, this);
+
+    if (id) {
+      this.status = RegistrationStatusFactory.create(status, this);
+    } else {
+      this.status = RegistrationStatusFactory.create(RegistrationStatusEnum.REVIEW, this);
+    }
   }
 }
