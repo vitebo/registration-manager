@@ -1,3 +1,4 @@
+import { ReactNode, HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 // TODO: turn private
@@ -17,8 +18,8 @@ export const _IconButtonStyled = styled.button`
 `;
 
 type IconButtonProps = {
-  children?: React.ReactNode;
-} & React.HTMLAttributes<HTMLButtonElement>;
+  children?: ReactNode;
+} & HTMLAttributes<HTMLButtonElement>;
 
 export const IconButton = (props: IconButtonProps) => {
   return <_IconButtonStyled {...props}>{props.children}</_IconButtonStyled>;

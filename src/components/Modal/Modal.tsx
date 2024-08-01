@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, MouseEvent } from 'react';
 import { HiOutlineX } from 'react-icons/hi';
 
 import * as S from './styles';
@@ -22,7 +22,7 @@ export const Modal = ({ onClose, isOpen, content }: ModalProps) => {
     };
   }, [onClose]);
 
-  function handleClickOverlay(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+  function handleClickOverlay(event: MouseEvent<HTMLDivElement>) {
     event.stopPropagation();
     if (event.target === event.currentTarget) {
       onClose();

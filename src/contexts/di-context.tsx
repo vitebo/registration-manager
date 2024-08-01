@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, ReactNode } from 'react';
 
 import { RegistrationGateway, RegistrationGatewayMemory } from '~/gateways';
 
@@ -7,7 +7,7 @@ interface DiContextValue {
 }
 
 interface DiProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
   provide: DiContextValue;
 }
 

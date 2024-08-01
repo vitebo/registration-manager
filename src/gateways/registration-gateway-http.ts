@@ -41,7 +41,7 @@ export class RegistrationGatewayHttp implements RegistrationGateway {
   }
 
   async delete(registration: Registration): Promise<void> {
-    this.httpClient.delete(`http://localhost:3000/registrations/${registration.id}`, new Headers());
+    return await this.httpClient.delete(`http://localhost:3000/registrations/${registration.id}`, new Headers());
   }
 
   async get(): Promise<Registration[]> {
