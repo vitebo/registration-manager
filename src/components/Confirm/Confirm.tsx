@@ -1,3 +1,5 @@
+import { Button } from '~/components/Buttons';
+
 import * as S from './style';
 
 interface ConfirmProps {
@@ -13,8 +15,10 @@ export const Confirm = ({ title, message, onConfirm, onCancel }: ConfirmProps) =
       <S.Title>{title}</S.Title>
       <S.Message>{message}</S.Message>
       <S.Actions>
-        <S.CancelButton onClick={onCancel}>Cancelar</S.CancelButton>
-        <S.ConfirmButton onClick={onConfirm}>Confirmar</S.ConfirmButton>
+        <Button onClick={onCancel}>Cancelar</Button>
+        <Button onClick={onConfirm} variant="primary">
+          Confirmar
+        </Button>
       </S.Actions>
     </S.Container>
   );

@@ -2,7 +2,7 @@ import { useForm, useFormState } from 'react-hook-form';
 import { HiRefresh } from 'react-icons/hi';
 import { useHookFormMask } from 'use-mask-input';
 
-import { Button, IconButton } from '~/components/Buttons';
+import { Button, ButtonIcon } from '~/components/Buttons';
 import { TextField } from '~/components/TextField';
 import { Cpf } from '~/entities';
 import { CpfValidation } from '~/validations';
@@ -64,10 +64,12 @@ export const SearchBar = ({ onClickRefresh, onValidCpf, onGoToNewAdmissionPage, 
         })}
       />
       <S.Actions>
-        <IconButton aria-label="refetch" onClick={handleRefresh}>
+        <ButtonIcon aria-label="refetch" onClick={handleRefresh} variant="primary">
           <HiRefresh />
-        </IconButton>
-        <Button onClick={onGoToNewAdmissionPage}>Nova Admissão</Button>
+        </ButtonIcon>
+        <Button onClick={onGoToNewAdmissionPage} variant="primary">
+          Nova Admissão
+        </Button>
       </S.Actions>
     </S.Container>
   );

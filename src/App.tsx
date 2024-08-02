@@ -1,13 +1,21 @@
-import { Header } from '~/components/Header';
+import { styled } from 'styled-components';
+
+import { Header, HeaderTitle } from '~/components/Header';
 import { Router } from '~/router';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`;
 
 export function App() {
   return (
-    <>
+    <Container>
       <Header>
-        <h1>Caju Front Teste</h1>
+        <HeaderTitle>Caju Front Teste</HeaderTitle>
       </Header>
       <Router />
-    </>
+    </Container>
   );
 }

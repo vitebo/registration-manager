@@ -31,6 +31,7 @@ export class RegistrationGatewayHttp implements RegistrationGateway {
   }
 
   async update(registration: Registration): Promise<Registration> {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     const raw = await this.httpClient.put(
       `http://localhost:3000/registrations/${registration.id}`,
       HttpRegistrationMapper.toHttp(registration),

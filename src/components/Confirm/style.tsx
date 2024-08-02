@@ -1,40 +1,28 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  color: ${({ theme }) => theme.colors.gray.dark};
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: ${({ theme }) => theme.spacing.xl};
 `;
 
 export const Title = styled.h2`
-  color: #424242;
-  margin: 0;
+  margin: ${({ theme }) => theme.spacing.none};
+  font-size: ${({ theme }) => theme.fontSize.xl};
+  font-weight: ${({ theme }) => theme.fontWeight.semibold};
 `;
 
 export const Message = styled.p`
-  color: #424242;
+  color: ${({ theme }) => theme.colors.gray.dark};
+  font-size: ${({ theme }) => theme.fontSize.md};
 `;
 
 export const Actions = styled.div`
   display: flex;
-  gap: 16px;
-`;
+  gap: ${({ theme }) => theme.spacing.xl};
 
-export const Button = styled.button`
-  background: #f0f0f0;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  flex: 1;
-`;
-
-export const ConfirmButton = styled(Button)`
-  background: rgb(155, 229, 155);
-  color: #000;
-`;
-
-export const CancelButton = styled(Button)`
-  background: #f0f0f0;
-  color: #424242;
+  & > * {
+    flex-grow: 1;
+  }
 `;

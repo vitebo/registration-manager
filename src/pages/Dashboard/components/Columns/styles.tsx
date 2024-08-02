@@ -1,64 +1,91 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
-const registrationStatusStyles: {
-  [key in string]: { background: string; title: string };
-} = {
-  REVIEW: {
-    background: '#FDF8E9',
-    title: '#EFC24D'
-  },
-  APPROVED: {
-    background: '#EEEEFD',
-    title: '#4242DF'
-  },
-  REPROVED: {
-    background: '#FBEDF6',
-    title: '#CE2893'
-  }
-};
+import { RegistrationStatusEnum } from '~/entities';
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 24px;
+  flex-grow: 1;
+  grid-gap: ${({ theme }) => theme.spacing['3xl']};
+  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
-  margin-top: 24px;
+  margin-top: ${({ theme }) => theme.spacing['3xl']};
+  overflow: hidden;
 `;
 
-export const Column = styled.div.withConfig({
-  shouldForwardProp: (prop) => !['status'].includes(prop)
-})<{ status: any }>`
-  height: auto;
-  background-color: ${({ status }) => registrationStatusStyles[status].background};
-  border-radius: 32px;
-  min-height: 80vh;
-  max-height: 80vh;
+const skeletonLoading = keyframes`
+  to {
+    background-position: -200% 0;
+  }
+`;
 
-  &.loading {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+export const Column = styled.section.withConfig({
+  shouldForwardProp: (prop) => !['loading', 'type'].includes(prop)
+})<{ type: RegistrationStatusEnum; loading: boolean }>`
+  border-radius: ${({ theme }) => theme.borderRadius['3xl']};
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  padding-bottom: ${({ theme }) => theme.spacing['xl']};
+  animation: ${skeletonLoading} 1.5s infinite;
+
+  //  ---
+  //  Type
+  //  ---
+
+  ${({ type, theme }) =>
+    type === RegistrationStatusEnum.REVIEW &&
+    `
+      background-color: ${theme.colors.yellow.light};
+      color: ${theme.colors.yellow.dark};
+  `}
+
+  ${({ type, theme }) =>
+    type === RegistrationStatusEnum.APPROVED &&
+    `
+      background-color: ${theme.colors.blue.light};
+      color: ${theme.colors.blue.dark};
+  `}
+  
+  ${({ type, theme }) =>
+    type === RegistrationStatusEnum.REPROVED &&
+    `
+      background-color: ${theme.colors.pink.light};
+      color: ${theme.colors.pink.dark};
+  `}
+  
+  //  ---
+  //  Loading
+  //  ---
+  
+  ${({ loading, theme }) =>
+    loading &&
+    `
+    background: ${theme.colors.gradients.skeleton};
     background-size: 200% 100%;
-    animation: loading 1.5s infinite;
-
-    @keyframes loading {
-      to {
-        background-position: -200% 0;
-      }
-    }
-  }
+    color: ${theme.colors.gray.bright};
+  `}
 `;
 
-export const TitleColumn = styled.h3.withConfig({
-  shouldForwardProp: (prop) => !['status'].includes(prop)
-})<{ status: any }>`
-  color: ${({ status }) => registrationStatusStyles[status].title};
-  margin: 24px;
-
-  &.loading {
-    color: #64748b;
-  }
+export const TitleColumn = styled.h2`
+  margin: ${({ theme }) => theme.spacing.none};
+  padding: ${({ theme }) => theme.spacing['2xl']};
+  font-size: ${({ theme }) => theme.spacing['2xl']};
 `;
 
 export const CollumContent = styled.div`
-  overflow: auto;
-  max-height: 85%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: ${({ theme }) => theme.spacing['xl']};
+  overflow-y: auto;
+
+  & > * {
+    margin-left: ${({ theme }) => theme.spacing['xl']};
+    margin-right: ${({ theme }) => theme.spacing['xl']};
+  }
+
+  & > *:last-child {
+    margin-bottom: ${({ theme }) => theme.spacing['xl']};
+  }
 `;

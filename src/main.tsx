@@ -1,11 +1,14 @@
 import { createRoot } from 'react-dom/client';
+import { ThemeProvider } from 'styled-components';
 
 import { App } from '~/App';
 import { APP_ROOT_ELEMENT_ID } from '~/constants';
 import { DiProvider, ModalProvider, NotificationProvider, RegistrationStoreProvider } from '~/contexts';
 import { HttpClientFetch } from '~/drivers';
 import { RegistrationGatewayHttp } from '~/gateways';
-import '~/index.css';
+
+import { GlobalStyle } from './style';
+import { theme } from './theme';
 
 const httpCLient = new HttpClientFetch();
 
@@ -16,11 +19,14 @@ const diProvide = {
 createRoot(document.getElementById(APP_ROOT_ELEMENT_ID)!).render(
   <DiProvider provide={diProvide}>
     <RegistrationStoreProvider>
-      <ModalProvider>
-        <NotificationProvider>
-          <App />
-        </NotificationProvider>
-      </ModalProvider>
+      <ThemeProvider theme={theme}>
+        <ModalProvider>
+          <NotificationProvider>
+            <GlobalStyle />
+            <App />
+          </NotificationProvider>
+        </ModalProvider>
+      </ThemeProvider>
     </RegistrationStoreProvider>
   </DiProvider>
 );

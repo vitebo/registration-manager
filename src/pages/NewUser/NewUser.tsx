@@ -3,7 +3,7 @@ import { HiOutlineArrowLeft } from 'react-icons/hi';
 import { useHistory } from 'react-router-dom';
 import { useHookFormMask } from 'use-mask-input';
 
-import { Button, IconButton } from '~/components/Buttons';
+import { Button, ButtonIcon } from '~/components/Buttons';
 import { TextField } from '~/components/TextField';
 import { Registration } from '~/entities';
 import { useRegistration } from '~/hooks';
@@ -53,9 +53,9 @@ export const NewUserPage = () => {
   return (
     <S.Container>
       <S.Card onSubmit={onSubmit}>
-        <IconButton onClick={() => goToHome()} aria-label="back">
+        <ButtonIcon onClick={() => goToHome()} aria-label="back" variant="primary">
           <HiOutlineArrowLeft size={24} />
-        </IconButton>
+        </ButtonIcon>
         <TextField
           id="name"
           placeholder="Nome"
@@ -96,7 +96,9 @@ export const NewUserPage = () => {
             }
           })}
         />
-        <Button type="submit">Cadastrar</Button>
+        <Button variant="primary" type="submit">
+          Cadastrar
+        </Button>
       </S.Card>
     </S.Container>
   );

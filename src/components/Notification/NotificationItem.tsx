@@ -5,8 +5,7 @@ import { CloseButton } from './styles';
 
 export enum NotificationType {
   SUCCESS = 'success',
-  ERROR = 'error',
-  INFO = 'info'
+  ERROR = 'error'
 }
 
 interface NotificationProps {

@@ -1,33 +1,93 @@
 import styled from 'styled-components';
 
-export const Button = styled.button`
-  outline: none;
-  display: flex;
+interface ButtonProps {
+  size?: 'sm';
+  variant?: 'success' | 'warning' | 'danger' | 'primary';
+}
+
+export const Button = styled.button.withConfig({
+  shouldForwardProp: (prop) => !['size', 'variant'].includes(prop)
+})<ButtonProps>`
   align-items: center;
   border: none;
-  border-radius: 36px;
-  padding: 8px 32px;
-  background-color: #64a98c;
+  box-shadow: ${({ theme }) => theme.boxShadow.sm};
   cursor: pointer;
-  height: 56px;
-  color: #fff;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  font-size: 16px;
-  font-weight: 600;
-`;
+  display: flex;
+  font-weight: ${({ theme }) => theme.fontWeight.semibold};
+  justify-content: center;
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  font-size: ${({ theme }) => theme.fontSize.base};
+  background-color: ${({ theme }) => theme.colors.gray.bright};
+  color: ${({ theme }) => theme.colors.white};
+  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
+  transition:
+    background-color 200ms,
+    color 200ms;
 
-export const ButtonSmall = styled.button.withConfig({
-  shouldForwardProp: (prop) => !['bgcolor', 'color'].includes(prop)
-})<{
-  bgcolor?: string;
-  color?: string;
-}>`
-  font-size: 12px;
-  outline: none;
-  border-radius: 4px;
-  border: none;
-  padding: 4px 16px;
-  background-color: ${(props) => props.bgcolor ?? 'none'};
-  color: ${(props) => props.color ?? '#000'};
-  cursor: pointer;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gray.light};
+    color: ${({ theme }) => theme.colors.gray.dark};
+  }
+
+  //  ---
+  //  Size
+  //  ---
+
+  ${({ size, theme }) =>
+    size === 'sm' &&
+    `
+      font-size: ${theme.fontSize.xs};
+      border-radius: ${theme.borderRadius.sm};
+      border: none;
+      padding: ${theme.spacing.sm} ${theme.spacing.xl};
+  `}
+
+  //  ---
+  // Variant
+  //  ---
+
+  ${({ variant, theme }) =>
+    variant === 'success' &&
+    `
+      background-color: ${theme.colors.success.bright};
+      color: ${theme.colors.gray.dark};
+      
+      &:hover {
+        background-color: ${theme.colors.success.light};
+      }
+  `}
+    
+  ${({ variant, theme }) =>
+    variant === 'warning' &&
+    `
+      background-color: ${theme.colors.warning.bright};
+      color: ${theme.colors.gray.dark};
+      
+      &:hover {
+        background-color: ${theme.colors.warning.light};
+      }
+  `}
+    
+  ${({ variant, theme }) =>
+    variant === 'danger' &&
+    `
+      background-color: ${theme.colors.danger.bright};
+      color: ${theme.colors.gray.dark};
+      
+      &:hover {
+        background-color: ${theme.colors.danger.light};
+      }
+  `}
+    
+  ${({ variant, theme }) =>
+    variant === 'primary' &&
+    `
+      background-color: ${theme.colors.teal.dark};
+      color: ${theme.colors.white};
+      
+      &:hover {
+        background-color: ${theme.colors.teal.bright};
+        color: ${theme.colors.white};
+      }
+  `}
 `;

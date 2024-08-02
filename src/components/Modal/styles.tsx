@@ -1,43 +1,42 @@
 import styled from 'styled-components';
 
 export const Overlay = styled.div`
-  background: rgba(242, 243, 245, 0.8);
-
-  position: fixed;
-  top: 0;
+  align-items: center;
+  background: ${({ theme }) => theme.colors.overlay};
   bottom: 0;
-  right: 0;
-  left: 0;
-
   display: flex;
   justify-content: center;
-  align-items: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
 `;
 
 export const Card = styled.div`
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
-
+  align-items: center;
+  background: ${({ theme }) => theme.colors.white};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  box-shadow: ${({ theme }) => theme.boxShadow.xl};
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  position: relative;
-
-  padding: 24px;
   min-width: 320px;
+  padding: ${({ theme }) => theme.spacing['3xl']};
+  position: relative;
 `;
 
 export const CloseButton = styled.button`
-  position: absolute;
-  top: 16px;
-  right: 16px;
+  align-items: center;
   background: transparent;
-  padding: 8px;
-  border: none;
+  border: ${({ theme }) => theme.borderWidth.none};
+  display: flex;
+  padding: ${({ theme }) => theme.spacing.md};
+  position: absolute;
+  right: ${({ theme }) => theme.spacing.xl};
+  top: ${({ theme }) => theme.spacing.xl};
+
   svg {
-    color: black;
+    color: ${({ theme }) => theme.colors.gray.dark};
   }
 `;
 

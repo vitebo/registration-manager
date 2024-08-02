@@ -3,4 +3,4 @@ export const routes = {
   dashboard: '/dashboard',
   history: '/history',
   newUser: '/new-user'
-};
+} as const;

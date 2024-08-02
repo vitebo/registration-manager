@@ -1,6 +1,6 @@
 import { HiOutlineMail, HiOutlineUser, HiOutlineCalendar, HiOutlineTrash } from 'react-icons/hi';
 
-import { ButtonSmall } from '~/components/Buttons';
+import { Button, ButtonIcon } from '~/components/Buttons';
 import { Registration, RegistrationStatusEnum } from '~/entities';
 
 import * as S from './styles';
@@ -18,11 +18,11 @@ export const RegistrationCard = ({ registration, onDelete, onReview, onReprove, 
     <S.Card>
       <S.IconAndText>
         <HiOutlineUser />
-        <h3>{registration.employeeName.value}</h3>
+        <S.CardTitle>{registration.employeeName.value}</S.CardTitle>
       </S.IconAndText>
       <S.IconAndText>
         <HiOutlineMail />
-        <p>{registration.email.value}</p>
+        <S.CardText>{registration.email.value}</S.CardText>
       </S.IconAndText>
       <S.IconAndText>
         <HiOutlineCalendar />
@@ -30,21 +30,23 @@ export const RegistrationCard = ({ registration, onDelete, onReview, onReprove, 
       </S.IconAndText>
       <S.Actions>
         {registration.status.canUpdate(RegistrationStatusEnum.REPROVED) && (
-          <ButtonSmall bgcolor="rgb(255, 145, 154)" onClick={onReprove}>
+          <Button variant="danger" size="sm" onClick={onReprove}>
             Reprovar
-          </ButtonSmall>
+          </Button>
         )}
         {registration.status.canUpdate(RegistrationStatusEnum.APPROVED) && (
-          <ButtonSmall bgcolor="rgb(155, 229, 155)" onClick={onApprove}>
+          <Button variant="success" size="sm" onClick={onApprove}>
             Aprovar
-          </ButtonSmall>
+          </Button>
         )}
         {registration.status.canUpdate(RegistrationStatusEnum.REVIEW) && (
-          <ButtonSmall bgcolor="#ff8858" onClick={onReview}>
+          <Button variant="warning" size="sm" onClick={onReview}>
             Revisar novamente
-          </ButtonSmall>
+          </Button>
         )}
-        <HiOutlineTrash onClick={onDelete} />
+        <ButtonIcon onClick={onDelete}>
+          <HiOutlineTrash />
+        </ButtonIcon>
       </S.Actions>
     </S.Card>
   );

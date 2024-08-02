@@ -1,2 +1,2 @@
-export { Button, ButtonSmall } from './Button';
-export { IconButton, _IconButtonStyled } from './IconButton';
+export { Button } from './Button';
+export { ButtonIcon } from './ButtonIcon.tsx';

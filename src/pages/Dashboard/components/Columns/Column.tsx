@@ -8,15 +8,13 @@ interface ColumnProps {
   children: ReactNode;
   status: RegistrationStatusEnum;
   title: string;
-  isLoading?: boolean;
+  isLoading: boolean;
 }
 
 export const Column = ({ children, status, title, isLoading }: ColumnProps) => {
   return (
-    <S.Column status={status} className={isLoading ? 'loading' : ''}>
-      <S.TitleColumn status={status} className={isLoading ? 'loading' : ''}>
-        {title}
-      </S.TitleColumn>
+    <S.Column loading={isLoading} type={status}>
+      <S.TitleColumn>{title}</S.TitleColumn>
       <S.CollumContent>{children}</S.CollumContent>
     </S.Column>
   );
