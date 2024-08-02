@@ -1,4 +1,4 @@
-import { useForm, useFormState } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { HiRefresh } from 'react-icons/hi';
 import { useHookFormMask } from 'use-mask-input';
 
@@ -24,13 +24,10 @@ export const SearchBar = ({ onClickRefresh, onValidCpf, onGoToNewAdmissionPage, 
   const {
     register,
     formState: { errors },
-    resetField,
-    control
+    resetField
   } = useForm<FormValues>({
     mode: 'onChange'
   });
-
-  const { touchedFields } = useFormState({ control });
 
   const registerWithMask = useHookFormMask(register);
 
@@ -48,9 +45,7 @@ export const SearchBar = ({ onClickRefresh, onValidCpf, onGoToNewAdmissionPage, 
     if (!messageError) {
       onValidCpf(new Cpf(cpf));
     }
-    if (touchedFields.cpf) {
-      return messageError;
-    }
+    return messageError;
   }
 
   return (
