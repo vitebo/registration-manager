@@ -16,7 +16,9 @@ export const Button = styled.button`
   font-weight: 600;
 `;
 
-export const ButtonSmall = styled.button<{
+export const ButtonSmall = styled.button.withConfig({
+  shouldForwardProp: (prop) => !['bgcolor', 'color'].includes(prop)
+})<{
   bgcolor?: string;
   color?: string;
 }>`

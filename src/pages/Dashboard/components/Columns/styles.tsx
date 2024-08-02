@@ -25,7 +25,9 @@ export const Container = styled.div`
   margin-top: 24px;
 `;
 
-export const Column = styled.div<{ status: any }>`
+export const Column = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['status'].includes(prop)
+})<{ status: any }>`
   height: auto;
   background-color: ${({ status }) => registrationStatusStyles[status].background};
   border-radius: 32px;
@@ -45,7 +47,9 @@ export const Column = styled.div<{ status: any }>`
   }
 `;
 
-export const TitleColumn = styled.h3<{ status: any }>`
+export const TitleColumn = styled.h3.withConfig({
+  shouldForwardProp: (prop) => !['status'].includes(prop)
+})<{ status: any }>`
   color: ${({ status }) => registrationStatusStyles[status].title};
   margin: 24px;
 
