@@ -37,8 +37,12 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: npm install -g yarn && yarn --frozen-lockfile
-      - name: Build
+      - name: Build App
         run: yarn build
+      - name: Build Docs
+        run: yarn build:docs
+      - name: Move docs to dist
+        run: mv storybook-static/ dist/docs
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
