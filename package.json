@@ -5,10 +5,10 @@
   "type": "module",
   "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --mode development",
     "dev:e2e": "vite --mode e2e",
     "init:db": "json-server --watch db.json",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --mode production",
     "test": "jest --verbose --no-cache ./src",
     "test:dev": "jest --watch --verbose --no-cache",
     "test:e2e": "playwright test",
@@ -60,7 +60,6 @@
     "ts-jest": "29.1.2",
     "ts-node": "10.9.2",
     "typescript": "^5.2.2",
-    "vite": "^5.2.0",
-    "vite-plugin-public-typescript": "^3.2.1"
+    "vite": "^5.2.0"
   }
 }
