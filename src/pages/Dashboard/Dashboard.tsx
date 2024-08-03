@@ -67,7 +67,7 @@ export const Dashboard = () => {
             isLoading={isLoading}
             aria-labelledby={collum.labelledby}
           >
-            {registrations
+            {(isLoading ? [] : registrations)
               .filter((registration) => registration.status.value === collum.status)
               .map((registration) => {
                 return (
