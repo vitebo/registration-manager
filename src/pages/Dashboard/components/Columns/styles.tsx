@@ -73,12 +73,14 @@ export const TitleColumn = styled.h2`
   font-size: ${({ theme }) => theme.spacing['2xl']};
 `;
 
-export const CollumContent = styled.div`
+export const CollumContent = styled.ul`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   gap: ${({ theme }) => theme.spacing['xl']};
+  margin: ${({ theme }) => theme.spacing.none};
   overflow-y: auto;
+  padding: ${({ theme }) => theme.spacing.none};
 
   & > * {
     margin-left: ${({ theme }) => theme.spacing['xl']};

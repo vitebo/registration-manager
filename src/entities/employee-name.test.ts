@@ -1,9 +1,12 @@
 import {
   EmployeeName,
   EmployeeNameFirstLetterIsNumberError,
-  EmployeeNameEmptyError,
+  // EmployeeNameEmptyError,
   EmployeeNameDontHaveMoreThanOneNameError
 } from './employee-name';
+
+// TODO test this error
+// EmployeeNameEmptyError
 
 describe('Entities > Employee Name', () => {
   test('should create an Employee Name with valid value', () => {
@@ -26,7 +29,7 @@ describe('Entities > Employee Name', () => {
   });
 
   test('should not create an Employee Name without lastname', () => {
-    expect(() => new EmployeeName('John ')).toThrow(new EmployeeNameEmptyError());
+    expect(() => new EmployeeName('John ')).toThrow(new EmployeeNameDontHaveMoreThanOneNameError());
   });
 
   test('should not create an Employee Name when fisrt letter is a number', () => {

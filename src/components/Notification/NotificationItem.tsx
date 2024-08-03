@@ -16,7 +16,7 @@ interface NotificationProps {
 
 export const NotificationItem = ({ message, type, onClose }: NotificationProps) => {
   return (
-    <S.Item type={type}>
+    <S.Item type={type} role="alert">
       <S.Message>{message}</S.Message>
       <CloseButton onClick={onClose}>
         <HiOutlineX />

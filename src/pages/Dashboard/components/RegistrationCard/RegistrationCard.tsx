@@ -11,11 +11,19 @@ interface RegistrationCardProps {
   onReprove: () => void;
   onReview: () => void;
   onDelete: () => void;
+  as?: 'li' | 'div';
 }
 
-export const RegistrationCard = ({ registration, onDelete, onReview, onReprove, onApprove }: RegistrationCardProps) => {
+export const RegistrationCard = ({
+  registration,
+  onDelete,
+  onReview,
+  onReprove,
+  onApprove,
+  as = 'div'
+}: RegistrationCardProps) => {
   return (
-    <S.Card>
+    <S.Card as={as}>
       <S.IconAndText>
         <HiOutlineUser />
         <S.CardTitle>{registration.employeeName.value}</S.CardTitle>
@@ -44,7 +52,7 @@ export const RegistrationCard = ({ registration, onDelete, onReview, onReprove, 
             Revisar novamente
           </Button>
         )}
-        <ButtonIcon onClick={onDelete}>
+        <ButtonIcon onClick={onDelete} aria-labelledby="remove-registration">
           <HiOutlineTrash />
         </ButtonIcon>
       </S.Actions>

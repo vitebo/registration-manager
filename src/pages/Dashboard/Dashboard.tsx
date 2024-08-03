@@ -9,9 +9,9 @@ import { SearchBar, Collumns, Column, RegistrationCard } from './components';
 import * as S from './styles';
 
 const allColumns = [
-  { status: RegistrationStatusEnum.REVIEW, title: 'Pronto para revisar' },
-  { status: RegistrationStatusEnum.APPROVED, title: 'Aprovado' },
-  { status: RegistrationStatusEnum.REPROVED, title: 'Reprovado' }
+  { status: RegistrationStatusEnum.REVIEW, title: 'Pronto para revisar', labelledby: 'registrations-in-review' },
+  { status: RegistrationStatusEnum.APPROVED, title: 'Aprovado', labelledby: 'registrations-approved' },
+  { status: RegistrationStatusEnum.REPROVED, title: 'Reprovado', labelledby: 'registrations-reproved' }
 ];
 
 export const Dashboard = () => {
@@ -29,7 +29,7 @@ export const Dashboard = () => {
 
   useEffect(() => {
     fetchRegistrations().then();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleRefreshRegistrations = useCallback(async () => {
     await fetchRegistrations();
@@ -60,12 +60,19 @@ export const Dashboard = () => {
       />
       <Collumns>
         {allColumns.map((collum) => (
-          <Column key={collum.status} status={collum.status} title={collum.title} isLoading={isLoading}>
+          <Column
+            key={collum.status}
+            status={collum.status}
+            title={collum.title}
+            isLoading={isLoading}
+            aria-labelledby={collum.labelledby}
+          >
             {registrations
               .filter((registration) => registration.status.value === collum.status)
               .map((registration) => {
                 return (
                   <RegistrationCard
+                    as="li"
                     registration={registration}
                     key={registration.id}
                     onApprove={() => approveRegistration(registration)}

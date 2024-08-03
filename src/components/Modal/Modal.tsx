@@ -35,7 +35,7 @@ export const Modal = ({ onClose, isOpen, content }: ModalProps) => {
 
   return (
     <S.Overlay onClick={handleClickOverlay}>
-      <S.Card>
+      <S.Card role="dialog">
         <S.CloseButton onClick={() => onClose()}>
           <HiOutlineX />
         </S.CloseButton>

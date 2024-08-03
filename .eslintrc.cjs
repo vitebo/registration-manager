@@ -68,6 +68,20 @@ module.exports = {
           }
         }
       }
+    },
+    {
+      files: ['e2e/**/*.ts'],
+      settings: {
+        'import/resolver': {
+          typescript: {
+            project: './e2e/tsconfig.json'
+          },
+          node: {
+            paths: ['src', 'test', 'e2e'],
+            extensions: ['.js', '.jsx', '.ts', '.tsx']
+          }
+        }
+      }
     }
   ]
 };
