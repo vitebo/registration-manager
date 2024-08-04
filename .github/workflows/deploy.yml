@@ -37,6 +37,12 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: npm install -g yarn && yarn --frozen-lockfile
+      - name: Check Lint and Format
+        run: |
+          yarn lint
+          yarn fomat
+      - name: Run Tests
+        run: yarn test
       - name: Build App
         run: yarn build
       - name: Build Docs

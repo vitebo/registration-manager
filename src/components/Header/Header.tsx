@@ -7,6 +7,7 @@ export const Header = styled.header`
   background: ${({ theme }) => theme.colors.gradients.redToOrange};
   display: flex;
   height: ${HEADER_HEIGHT};
+  left: 0;
   padding: ${({ theme }) => theme.spacing.none} ${({ theme }) => theme.spacing['3xl']};
   position: fixed;
   top: 0;

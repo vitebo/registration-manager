@@ -1,7 +1,7 @@
 # Registration Manager
 
 A ideia dessa documentação é compartilhar um pouco a estrutura do projeto, decisões tomadas,
-problemas encontrados e como eles foram resolvidos.
+problemas encontrados e como eles foram (ou não) resolvidos.
 
 ## Disclaimer
 
@@ -26,3 +26,25 @@ estático no arquivo `index.html`, esse `script` é inserido pelo `vite` na hora
 feito via plugin do `vite` que está definido no próprio `vite.config.ts`, o plugin se chama `entry-point-by-mode`.
 
 Ao decorrer da documentação vou explicar um pouco mais sobre o `entry-point-by-mode` e como ele funciona.
+
+## Pontos de melhoria
+
+Aqui é legal ja deixar claro pontos que podem ser melhorados na aplicação e que não foram feitos por falta
+de prioridade em relação aos outros itens do desafio.
+
+### Responsividade
+
+A aplicação não está responsiva, por se tratar de um `dashboard` não parece ser grande problemas. Acredito que
+fazer um `flex-direction: column` no componente de `Columns` ja resolveria boa parte dos problemas de responsividade
+da aplicação. De qualquer forma é importante mencionar que esse ponto não foi atacado no desafio.
+
+### Design
+
+Da mesma forma o design da aplicação não foi atacado, a aplicação está com o memso design que foi entregue no desafio.
+O unico ponto que acredito que vale a pena mencionar é que o scroll do content do `Column` foi corrigido,
+então agora é possivel adicionar N cards na coluna que o scroll é adicionando corretamente na coluna deixando
+sempre o `title` visivel e sem adicionar um `scroll` no `body` da aplicação.
+
+Implementei tambem uns estilos de `outline` e `hover` para acessibilidade e usabilidade, mas as cores de
+hover e outiline por exemplo não são as melhores. Dado os requisitos do desafio eu foquei mais em funcionalidades
+do que em design.

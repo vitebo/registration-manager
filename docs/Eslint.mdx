@@ -1,0 +1,23 @@
+# `.eslintrc.cjs`
+
+Alem das regras padrões de lint que vieram no boilerplate, eu adicionei algumas regras que eu
+acho interessante para manter o código mais limpo e organizado.
+
+Uma delas são referente a `import` e `export` da aplicação. Entre elas temos uma bem rigorosa chamada
+[`import/no-internal-modules`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-internal-modules.md)
+que pode dar um pouco mais de dor de cabeça caso você não ler a documentação de
+como ela funciona.
+
+A grande vantagem é que conseguimos ter arquivos privados dentro dos nossos
+módulos, como se fosse realmente um pacote separado.
+
+Um exemplo simples na aplicação é o arquivo de `~/entities/registration-status.ts`,
+ele exporta algumas classes que são utilizadas entre os arquivos da pasta `entities`,
+mas não devem ser utilizadas fora dela.
+
+## Prettier
+
+O prettier também foi configurado para manter o código mais limpo e organizado.
+A configuração dele é bem simples mas trabalha de forma independente do eslint.
+
+PS: O eslint possui um plugin para desligar as regras que dão conflito com o prettier,

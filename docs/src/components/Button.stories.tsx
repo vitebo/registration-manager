@@ -1,13 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
+
 import { Button } from '~/components/Buttons';
 
-const variants = ['primary', 'success', 'danger', 'warning', ''] as const;
+const variants = ['primary', 'success', 'danger', 'warning', undefined] as const;
 
-const sizes = ['sm', ''] as const;
+const sizes = ['sm', undefined] as const;
 
 const meta: Meta<typeof Button> = {
-  title: 'Components/Button',
+  title: 'Src/Components/Button',
   component: Button,
   parameters: {
     layout: 'centered'
@@ -26,6 +27,9 @@ const meta: Meta<typeof Button> = {
         type: 'select'
       },
       options: sizes
+    },
+    onClick: {
+      action: 'click'
     }
   }
 } satisfies Meta<typeof Button>;
@@ -45,14 +49,11 @@ export const AllVariants: Story = {
     <div style={{ display: 'flex', gap: '10px' }}>
       {variants.map((variant) => (
         <Button key={variant} {...args} variant={variant}>
-          {variant.charAt(0).toUpperCase() + variant.slice(1) || 'Default'}
+          {variant ? variant.charAt(0).toUpperCase() + variant.slice(1) : 'Default'}
         </Button>
       ))}
     </div>
-  ),
-  args: {
-    onClick: fn()
-  }
+  )
 };
 
 export const AllSizes: Story = {
@@ -64,8 +65,5 @@ export const AllSizes: Story = {
         </Button>
       ))}
     </div>
-  ),
-  args: {
-    onClick: fn()
-  }
+  )
 };

@@ -1,27 +1,25 @@
 # `~/contexts/`
 
-Aqui talvez eu tenha me perdido um pouco no conceito de context api do react, mas eu tratei os contexts como
-os [plugins do vue](https://vuejs.org/guide/reusability/plugins). Isso porque eu não consegui
-tempo para estudar essa parte mais de `design de software` dentro do react.
+Aqui, talvez eu tenha me perdido um pouco no conceito da Context API do React, mas tratei os contexts como os
+[plugins do Vue](https://vuejs.org/guide/reusability/plugins.html). Isso porque não tive tempo para estudar mais sobre
+design de software no React.
 
-Plugins no vue são basicamente funções que adicionam funcionalidades na aplicação.
+Plugins no Vue são basicamente funções que adicionam funcionalidades à aplicação.
 
-Isso parece que funcionou bem, o unico problema eu acredito que foi no `registration-store-context`.
+Essa abordagem parece ter funcionado bem, com exceção do `registration-store-context`.
 
 ## `~/contexts/registration-store-context`
 
-A ideia desse contexto é de atuar como uma espécie de estado global da aplicação (referente a `Registration`).
-Então ele garante que o estado das `registrations` em memória esteja sempre atualizado com a do gateway
-utilizado na aplicação.
+A ideia desse contexto é atuar como uma espécie de estado global da aplicação (referente a `Registration`). Ele garante
+que o estado das `registrations` em memória esteja sempre atualizado com o gateway utilizado na aplicação.
 
-Mas por algum motivo que não consegui parar para investigar a fundo, as funções do contexto estão sendo recriadas
-a cada renderização. Apesar da versão final estar retoranando as funções dieretamente,
-ao decorrer do desevolvimento eu tentei utilizar o `useMemo` e `useCallback` para tentar resolver esse problema,
-mas não funcionou.
+No entanto, por algum motivo que ainda não consegui investigar a fundo, as funções do contexto estão sendo recriadas a
+cada renderização. Apesar da versão final estar retornando as funções diretamente, durante o desenvolvimento, tentei
+utilizar `useMemo` e `useCallback` para resolver esse problema, mas sem sucesso.
 
-Apesar de não parecer muito complexo parar para resolver, o uso de qualquer lib de gerenciamento de estado
-resolveria esse problema, então parece ser muito mais um problema de implementação da store do que de conceito.
+Embora não pareça muito complexo de resolver, o uso de qualquer biblioteca de gerenciamento de estado resolveria esse
+problema, indicando que é mais uma questão de implementação da store do que de conceito.
 
-Um efeito colateral disso é que no `useEffect` da página de `Dashboard` onde eu busco as registrations
-para listar nas colunas, eu não consigo colocar o `fetchRegistrations` como dependência. Isso gera um warning
-na aplicação, por isso achei importante dar esse disclaimer.
+Um efeito colateral disso é que no `useEffect` da página de `Dashboard`, onde busco as `registrations` para listar nas
+colunas, não consigo colocar `fetchRegistrations` como dependência. Isso gera um aviso (warning) na aplicação, por isso
+achei importante mencionar isso.

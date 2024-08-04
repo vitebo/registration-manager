@@ -1,37 +1,36 @@
 # `~/`
 
-No `~/src` temos alguns arquivos e pastas importantes para o projeto. Vamos falar aqui apenas sobre os
-arquivos, as pastas serão abordadas mais a frente.
+No diretório `~/src`, temos alguns arquivos e pastas importantes para o projeto. Vamos falar aqui apenas sobre os
+arquivos; as pastas serão abordadas mais à frente.
 
 ## `main.development.tsx` e `main.production.tsx`
 
-Esses arquivos são os entry points da aplicação. Eles atuam apenas como um composition root, ou seja,
-eles são responsáveis por injetar as dependências necessárias para a aplicação funcionar.
+Esses arquivos são os pontos de entrada (entry points) da aplicação. Eles atuam apenas como um *composition root*, ou
+seja, são responsáveis por injetar as dependências necessárias para a aplicação funcionar.
 
-O `main.development.tsx` sobe a aplicação utilizando um gateway que consome os dados da API local
-(`json-server`) como especificado no desafio. Já o `main.production.tsx` sobe a aplicação utilizando um
-gateway que consome os dados do localstorage. Isso para simplificar as coisas e não precisar subir a API
-em produção, usando o localstorage ja conseguimos uma persistência de dados.
+O arquivo `main.development.tsx` inicia a aplicação utilizando um gateway que consome dados da API local
+(`json-server`), conforme especificado no desafio. Já o `main.production.tsx` inicia a aplicação usando um gateway que
+consome dados do `localStorage`. Isso simplifica o processo, evitando a necessidade de subir a API em produção, pois
+com o `localStorage` conseguimos uma forma de persistência de dados.
 
 ## `constants.ts`
 
-Esse arquivo contém algumas constantes utilizadas em toda a aplicação, não existe nada de muito especial
-por aqui.
+Este arquivo contém algumas constantes utilizadas em toda a aplicação, sem nada de muito especial.
 
 ## `style.tsx`
 
-O que antigamente era o `index.css` agora é o `style.tsx`. Esse arquivo contém o estilo global da aplicação
-utilizando o `styled-components`. Nada de mais, apenas movi o `import` da font para o arquivo `index.html` e
-criei algumas regras de `outline` para melhorar a acessibilidade.
+O que antigamente era o `index.css` agora é o `style.tsx`. Este arquivo contém o estilo global da aplicação utilizando
+`styled-components`. Basicamente, movi o `import` da fonte para o arquivo `index.html` e criei algumas regras de
+`outline` para melhorar a acessibilidade.
 
 ## `theme.ts`
 
-Esse arquivo contém o tema da aplicação, ele é utilizado pelo `styled-components` para definir as
-(cores e sizes, border, etc...) utilizadas na aplicação. Isso apenas para conseguir alguma consistência
-na hora de estilizar os componentes. Não dei muita atenção para esse arquivo, os valores na sua maioria
-são retirados do `tailwind`, a ideia era realmente apenas ter um tema para a aplicação.
+Este arquivo contém o tema da aplicação, utilizado pelo `styled-components` para definir as cores, tamanhos, bordas,
+etc., utilizados na aplicação. O objetivo é conseguir alguma consistência ao estilizar os componentes. Não dei muita
+atenção a este arquivo; a maioria dos valores são retirados do `Tailwind CSS`. A ideia era apenas ter um tema para a
+aplicação.
 
 ## `App.tsx`
 
-Esse é o `App.tsx` como em qualquer aplicação react. Eles apenas configura os providers da aplicação e
-atua como uma espécie de `layout` da aplicação.
+Este é o `App.tsx`, como em qualquer aplicação React. Ele apenas configura os *providers* da aplicação e atua como uma
+espécie de *layout*.
