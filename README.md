@@ -48,7 +48,13 @@ Para rodar os testes:
 yarn test:dev
 ```
 
-E os testes e2e:
+Para os testes ened-to-end: você precisa primeiro instalar os browsers:
+
+```shell
+yarn playwright install --with-deps
+```
+
+Depois rodar os testes:
 
 ```shell
 yarn test:e2e:ui
