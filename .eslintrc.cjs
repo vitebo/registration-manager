@@ -59,7 +59,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['tests/**/*.ts'],
+      files: ['tests/**/*'],
       settings: {
         'import/resolver': {
           typescript: {

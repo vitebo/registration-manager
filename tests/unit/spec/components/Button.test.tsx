@@ -1,6 +1,5 @@
-import { render, screen } from '~~/unit/fixtures';
-
 import { Button } from '~/components/Buttons';
+import { render, screen } from '~~/unit/fixtures/';
 
 describe('Components > Button', () => {
   it('Should show button', () => {

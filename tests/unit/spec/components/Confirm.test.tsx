@@ -1,6 +1,6 @@
-import { render, screen } from '~~/unit/fixtures';
-
 import { Confirm } from '~/components/Confirm';
+
+import { render, screen } from '~~/unit/fixtures';
 
 describe('Components > Confirm', () => {
   it('call onConfig cb when confirm action', () => {

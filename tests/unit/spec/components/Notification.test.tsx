@@ -1,6 +1,6 @@
-import { render, screen } from '~~/unit/fixtures';
-
 import { NotificationType, NotificationList, NotificationItem } from '~/components/Notification';
+
+import { render, screen } from '~~/unit/fixtures';
 
 describe('Components > Notification', () => {
   it('show content when modal is open', () => {

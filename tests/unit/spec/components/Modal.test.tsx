@@ -1,6 +1,6 @@
-import { render, screen } from '~~/unit/fixtures';
-
 import { Modal } from '~/components/Modal';
+
+import { render, screen } from '~~/unit/fixtures';
 
 describe('Components > Modal', () => {
   const ContentComponent = () => <div>Content</div>;
