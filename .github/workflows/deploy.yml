@@ -40,7 +40,7 @@ jobs:
       - name: Check Lint and Format
         run: |
           yarn lint
-          yarn fomat
+          yarn format
       - name: Run Tests
         run: yarn test
       - name: Build App
