@@ -17,9 +17,9 @@ ela atende bem às necessidades e escala com facilidade caso surjam regras mais 
 
 ## `registration.ts`
 
-`Registration` é a única entidade da aplicação, o que justifica a pasta `entities` é que inclui os *value objects*
+`Registration` é a única entidade da aplicação, o que justifica a pasta `entities` é que inclui os _value objects_
 (CPF, Email, Name, etc.) da aplicação aqui. Portanto, a pasta está mais para um `business` do que apenas `entities`.
 
 Outro ponto a ser observado é que a entidade `registration` está cuidando de `admissionDateFormatted`. O ideal seria
-ter um *value object* para isso, mas como não havia nenhuma regra associada a essa propriedade, preferi simplesmente
+ter um _value object_ para isso, mas como não havia nenhuma regra associada a essa propriedade, preferi simplesmente
 deixá-la na entidade.

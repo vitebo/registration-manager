@@ -1,11 +1,11 @@
 # `~/gateways/`
 
-Gateways formam a camada de comunicação com o mundo externo, comumente conhecida como *services* em outras aplicações.
+Gateways formam a camada de comunicação com o mundo externo, comumente conhecida como _services_ em outras aplicações.
 
-Com os *adapters*, conseguimos abstrair quem é esse "mundo externo". Por exemplo:
+Com os _adapters_, conseguimos abstrair quem é esse "mundo externo". Por exemplo:
 
-Aqui temos implementações de gateways utilizando o *driver* `http-client` para comunicação com a API, um gateway
-utilizando o *driver* `storage` para comunicação com o `localStorage` e, ainda, um *adapter* onde salvamos os dados em
+Aqui temos implementações de gateways utilizando o _driver_ `http-client` para comunicação com a API, um gateway
+utilizando o _driver_ `storage` para comunicação com o `localStorage` e, ainda, um _adapter_ onde salvamos os dados em
 memória.
 
 Isso é utilizado na aplicação porque podemos trocar a implementação do gateway dependendo do ambiente.
@@ -18,13 +18,13 @@ Neste projeto, por exemplo:
 
 ## `~/gateways/registration-gateway-http`
 
-É importante mencionar que o *adapter* HTTP está utilizando a `BASE_URL` diretamente no código. O ideal seria mover
-essa `BASE_URL` para uma variável de ambiente do Vite e, no *composition root* (`main.tsx`), passá-la como argumento na
+É importante mencionar que o _adapter_ HTTP está utilizando a `BASE_URL` diretamente no código. O ideal seria mover
+essa `BASE_URL` para uma variável de ambiente do Vite e, no _composition root_ (`main.tsx`), passá-la como argumento na
 construção da classe `RegistrationGatewayHttp`.
 
 Não fiz essas alterações porque em produção estamos usando um gateway que salva os dados no `localStorage`.
 
 Para utilizar variáveis de ambiente de forma eficaz, seria interessante criar um `~/environments.ts` que retorna uma
-classe que faz um *wrapper* para o `import.meta.env` e retorna as variáveis de ambiente tipadas. Caso haja alguma
-variável de ambiente obrigatória (*required*), podemos fazer um `throw new Error` no `constructor` da classe caso a
+classe que faz um _wrapper_ para o `import.meta.env` e retorna as variáveis de ambiente tipadas. Caso haja alguma
+variável de ambiente obrigatória (_required_), podemos fazer um `throw new Error` no `constructor` da classe caso a
 variável não exista, informando uma mensagem amigável para o desenvolvedor.
