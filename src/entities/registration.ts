@@ -1,3 +1,5 @@
+import { StringDateMapper } from '~/mappers';
+
 import { Cpf } from './cpf';
 import { Email } from './email';
 import { EmployeeName } from './employee-name';
@@ -8,7 +10,7 @@ interface RegistrationProps {
   employeeName: string;
   cpf: string;
   email: string;
-  admissionDate: Date;
+  admissionDate: string;
   status?: keyof typeof RegistrationStatusEnum;
 }
 
@@ -32,7 +34,7 @@ export class Registration {
     this.employeeName = new EmployeeName(employeeName);
     this.cpf = new Cpf(cpf);
     this.email = new Email(email);
-    this.admissionDate = new Date(admissionDate);
+    this.admissionDate = StringDateMapper.toDate(admissionDate);
 
     if (id) {
       this.status = RegistrationStatusFactory.create(status, this);

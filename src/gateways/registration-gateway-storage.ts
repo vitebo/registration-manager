@@ -1,6 +1,6 @@
 import { Storage } from '~/drivers';
 import { Cpf, Registration } from '~/entities';
-import { StorageRegistrationMapper } from '~/mappers';
+import { StorageRegistrationMapper, StringDateMapper } from '~/mappers';
 
 import { RegistrationGateway } from './registration-gateway';
 
@@ -25,7 +25,7 @@ export class RegistrationGatewayStorage implements RegistrationGateway {
       employeeName: registration.employeeName.value,
       cpf: registration.cpf.value,
       email: registration.email.value,
-      admissionDate: registration.admissionDate,
+      admissionDate: StringDateMapper.toString(registration.admissionDate),
       status: registration.status.value
     });
     registrations.push(createdRegistration);

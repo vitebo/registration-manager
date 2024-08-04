@@ -16,7 +16,7 @@ type FormValues = {
   name: string;
   email: string;
   cpf: string;
-  admissionDate: Date;
+  admissionDate: string;
 };
 
 export const NewUserPage = () => {

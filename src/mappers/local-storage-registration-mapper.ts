@@ -1,5 +1,7 @@
 import { Registration, RegistrationStatusEnum } from '~/entities';
 
+import { StringDateMapper } from './string-date-mapper';
+
 interface StorageRegistration {
   registrationId?: string;
   employeeName: string;
@@ -17,7 +19,7 @@ export class StorageRegistrationMapper {
         employeeName: registration.employeeName.value,
         cpf: registration.cpf.value,
         email: registration.email.value,
-        admissionDate: registration.admissionDate.toString(),
+        admissionDate: StringDateMapper.toString(registration.admissionDate),
         status: registration.status.value
       }))
     );
@@ -32,7 +34,7 @@ export class StorageRegistrationMapper {
           employeeName: data.employeeName,
           cpf: data.cpf,
           email: data.email,
-          admissionDate: new Date(data.admissionDate),
+          admissionDate: data.admissionDate,
           status: RegistrationStatusEnum[data.status as keyof typeof RegistrationStatusEnum]
         })
     );

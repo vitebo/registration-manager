@@ -1,12 +1,14 @@
 import { Registration } from '~/entities';
 
+import { StringDateMapper } from './string-date-mapper';
+
 export class HttpRegistrationMapper {
   static toHttp(registration: Registration) {
     return {
       employeeName: registration.employeeName.value,
       cpf: registration.cpf.value,
       email: registration.email.value,
-      admissionDate: registration.admissionDate.toString(),
+      admissionDate: StringDateMapper.toString(registration.admissionDate),
       status: registration.status.value
     };
   }
@@ -17,7 +19,7 @@ export class HttpRegistrationMapper {
       employeeName: raw.employeeName,
       cpf: raw.cpf,
       email: raw.email,
-      admissionDate: new Date(raw.admissionDate),
+      admissionDate: raw.admissionDate,
       status: raw.status
     });
   }

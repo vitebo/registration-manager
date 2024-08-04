@@ -2,6 +2,7 @@ import { fakerPT_BR as faker } from '@faker-js/faker';
 import { generate as generateCpf } from 'gerador-validador-cpf';
 
 import { RegistrationStatusEnum, Registration } from '~/entities';
+import { StringDateMapper } from '~/mappers';
 
 export class RegistrationFactory {
   static create({
@@ -17,7 +18,7 @@ export class RegistrationFactory {
       employeeName,
       cpf,
       email,
-      admissionDate,
+      admissionDate: StringDateMapper.toString(admissionDate),
       status
     });
   }

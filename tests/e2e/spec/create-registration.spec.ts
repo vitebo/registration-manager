@@ -3,12 +3,14 @@ import { test, expect } from '~~/e2e/fixtures';
 test('create registration', async ({ emptyDashboard: app }) => {
   await app.dashboardPage.goToNewRegistration();
   await app.formPage.fillForm({
-    employeeName: 'John Doe'
+    employeeName: 'John Doe',
+    admissionDate: new Date(2024, 7, 9)
   });
   expect(await app.modalTitle.textContent()).toStrictEqual('Criar cadastro');
   await app.confirmAction();
   expect(app.isDashboardPage()).toBe(true);
   await expect(app.dashboardPage.itemInReview.getByRole('heading', { name: 'John Doe' })).toBeVisible();
+  await expect(app.dashboardPage.itemInReview.getByText('09/08/2024')).toBeVisible();
   await expect(app.notification.getByText('Cadastro criado com sucesso!')).toBeVisible();
 });
 

@@ -1,4 +1,5 @@
 import { Cpf, Registration } from '~/entities';
+import { StringDateMapper } from '~/mappers';
 
 import { RegistrationGateway } from './registration-gateway';
 
@@ -15,7 +16,7 @@ export class RegistrationGatewayMemory implements RegistrationGateway {
       employeeName: registration.employeeName.value,
       cpf: registration.cpf.value,
       email: registration.email.value,
-      admissionDate: registration.admissionDate,
+      admissionDate: StringDateMapper.toString(registration.admissionDate),
       status: registration.status.value
     });
     this.registrations.push(createdRegistration);
