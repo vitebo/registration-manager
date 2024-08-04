@@ -1,8 +1,7 @@
 # `~/drivers/`
 
-Nesta pasta, temos as implementações de infraestrutura da aplicação. Aqui estão as implementações de `http-client` e
-`storage`. Essas implementações são utilizadas para abstrair a comunicação com a API e, por exemplo, com o
-`localStorage`. Dessa forma, é fácil criar um _adapter_ para um _storage_, utilizando uma biblioteca (ou não), e é
-simples trocar a implementação.
+Nesta pasta, temos as implementações de infraestrutura da aplicação. Aqui estão as implementações de `http-client` e `storage`. Essas implementações são utilizadas para abstrair a comunicação com a API e, por exemplo, com o `localStorage`. Dessa forma, é fácil criar um _adapter_ para um _storage_, utilizando uma biblioteca (ou não), e é simples trocar a implementação.
 
 A ideia principal é evitar o acoplamento com um _driver_ específico ou com uma biblioteca que utiliza esse _driver_.
+
+Um driver de `Logger` também seria bem-vindo, para que possamos ter logs em diferentes ambientes, como `development`, `production` e `test`.

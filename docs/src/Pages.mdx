@@ -2,13 +2,8 @@
 
 Aqui ficam as páginas da aplicação, cada página é um componente React que é renderizado pelo `Router`.
 
-Uma mudança importante a comentar é que, diferente da estrutura inicial do projeto, todas as regras de UI agora estão
-concentradas no componente root da página. Isso facilita a manutenção das páginas. Embora seja tentador criar um
-componente de página com lógica e acesso direto aos hooks e contexts, isso pode dificultar a manutenção, reutilização e
-criação de testes para os componentes.
+Uma mudança importante a comentar é que, diferente da estrutura inicial do projeto, todas as regras de UI agora estão concentradas no componente root da página. Isso facilita a manutenção das páginas. Embora seja tentador criar um componente de página com lógica e acesso direto aos hooks e contexts, isso pode dificultar a manutenção, reutilização e criação de testes para os componentes.
 
-Podemos usar o componente `Columns` do `Dashboard` como exemplo. Anteriormente, ele conhecia os tipos de colunas que
-deveria renderizar, o que impedia a reutilização do componente `Columns` em outras páginas.
+Podemos usar o componente `Columns` do `Dashboard` como exemplo. Anteriormente, ele conhecia os tipos de colunas que deveria renderizar, o que impedia a reutilização do componente `Columns` em outras páginas.
 
-Com essas atualizações, podemos mover praticamente todos esses componentes para a pasta `~/src/components/` e deixar as
-páginas apenas com a lógica de renderização e acesso aos hooks e contexts.
+Com essas atualizações, podemos mover praticamente todos esses componentes para a pasta `~/components/` e deixar as páginas apenas com a lógica de renderização e acesso aos hooks e contexts.

@@ -1,5 +1,4 @@
 import { Confirm } from '~/components/Confirm';
-
 import { render, screen } from '~~/unit/fixtures';
 
 describe('Components > Confirm', () => {

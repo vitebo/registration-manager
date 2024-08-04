@@ -1,5 +1,4 @@
 import { Modal } from '~/components/Modal';
-
 import { render, screen } from '~~/unit/fixtures';
 
 describe('Components > Modal', () => {

@@ -1,5 +1,4 @@
 import { NotificationType, NotificationList, NotificationItem } from '~/components/Notification';
-
 import { render, screen } from '~~/unit/fixtures';
 
 describe('Components > Notification', () => {

@@ -2,9 +2,6 @@
 
 Mappers são um padrão simples utilizado para facilitar a conversão de um objeto para outro.
 
-Por exemplo, durante a aplicação inteira trabalhamos com a entidade `Registration`, mas quando vamos enviar dados para
-a API, precisamos converter para um objeto que a API entenda. Da mesma forma, quando recebemos um objeto da API,
-precisamos converter o JSON para a entidade `Registration`. Como `Registration` é uma classe, um `JSON.parse` /
-`JSON.stringify` não funcionaria diretamente.
+Por exemplo, durante a aplicação inteira trabalhamos com a entidade `Registration`, mas quando vamos enviar dados para a API, precisamos converter para um objeto que a API entenda. Da mesma forma, quando recebemos um objeto da API, precisamos converter o JSON para a entidade `Registration`. Como `Registration` é uma classe, um `JSON.parse` / `JSON.stringify` não funcionaria corretamente.
 
 Os mappers resolvem esse problema, convertendo um objeto para outro e vice-versa.

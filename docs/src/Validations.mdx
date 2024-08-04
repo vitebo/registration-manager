@@ -1,10 +1,7 @@
 # `~/validations/`
 
-Diferente do que pode parecer, `validations` não cuida das regras para validar um dado. Isso é responsabilidade da
-entidade e de seus _value objects_. A função de `validations` é apenas tentar criar o _value object_ a partir da entrada
-do usuário.
+Diferente do que pode parecer, `validations` não cuida das regras para validar um dado. Isso é responsabilidade da entidade e de seus _value objects_. A função de `validations` é apenas tentar criar o _value object_ a partir da entrada do usuário.
 
-Os _value objects_ retornam uma `Exception` diferente para cada tipo de erro que pode ocorrer. A camada de `validations`
-apenas traduz essa `Exception` do _value object_ para uma mensagem amigável ao usuário, que será exibida na tela.
+Os _value objects_ retornam uma `Exception` diferente para cada tipo de erro que pode ocorrer. A camada de `validations` apenas traduz essa `Exception` do _value object_ para uma mensagem amigável ao usuário, que será exibida na tela.
 
 As regras de internacionalização relacionadas às mensagens de erro são tratadas nessa camada.

@@ -1,25 +1,15 @@
 # `~/entities/`
 
-Nesta pasta, temos as entidades da aplicação. As entidades são objetos que representam os dados da aplicação. Não
-encare isso como um DDD (Domain-Driven Design) ou algo do tipo, pois essa não é a intenção. A ideia aqui é apenas
-aproveitar alguns conceitos que ajudam a organizar o código.
+Nesta pasta, temos as entidades da aplicação. As entidades são objetos que representam os dados da aplicação. Não encare isso como um DDD (Domain-Driven Design) ou algo do tipo, pois essa não é a intenção. A ideia aqui é apenas aproveitar alguns conceitos que ajudam a organizar o código.
 
-Todas as regras de negócios descritas no desafio estão implementadas nas entidades. Isso é feito para que as regras de
-negócio fiquem centralizadas, não se espalhem pela aplicação e facilitem os testes para cobrir todos os cenários
-possíveis.
+Todas as regras de negócios descritas no desafio estão implementadas nas entidades. Isso é feito para que as regras de negócio fiquem centralizadas, não se espalhem pela aplicação e facilitem os testes para cobrir todos os cenários possíveis.
 
 ## `registration-status.ts`
 
-Este arquivo contém a máquina de estados que define as regras de transição de status de um `status` de `registration`.
-A estrutura pode parecer um pouco confusa à primeira vista, pois esta é apenas uma implementação básica de uma máquina
-de estados, evitando assim a necessidade de instalar uma biblioteca específica para isso. Apesar de ser bem simples,
-ela atende bem às necessidades e escala com facilidade caso surjam regras mais complexas sobre a atualização de status.
+Este arquivo contém a máquina de estados que define as regras de transição de status de um `status` de `registration`. A estrutura pode parecer um pouco confusa à primeira vista, pois esta é apenas uma implementação básica de uma máquina de estados, evitando assim a necessidade de instalar uma biblioteca específica para isso. Apesar de ser bem simples, ela atende bem às necessidades e escala com facilidade caso surjam regras mais complexas sobre a atualização de status.
 
 ## `registration.ts`
 
-`Registration` é a única entidade da aplicação, o que justifica a pasta `entities` é que inclui os _value objects_
-(CPF, Email, Name, etc.) da aplicação aqui. Portanto, a pasta está mais para um `business` do que apenas `entities`.
+`Registration` é a única entidade da aplicação, o que justifica a pasta `entities` é que inclui os _value objects_ (CPF, Email, Name, etc.) da aplicação aqui. Portanto, a pasta está mais para um `business` do que apenas `entities`.
 
-Outro ponto a ser observado é que a entidade `registration` está cuidando de `admissionDateFormatted`. O ideal seria
-ter um _value object_ para isso, mas como não havia nenhuma regra associada a essa propriedade, preferi simplesmente
-deixá-la na entidade.
+Outro ponto a ser observado é que a entidade `registration` está cuidando de `admissionDateFormatted`. O ideal seria ter um _value object_ para isso, mas como não havia nenhuma regra associada a essa propriedade, preferi simplesmente deixá-la na entidade.

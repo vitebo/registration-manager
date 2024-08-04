@@ -1,18 +1,13 @@
 # `~/hooks/`
 
-Talvez eu tenha me perdido um pouco no conceito de hooks do React, mas tratei os hooks como os
-[composables do Vue](https://vuejs.org/guide/reusability/composables.html). Isso porque não tive tempo para estudar
-mais sobre design de software no React.
+Talvez eu tenha me perdido um pouco no conceito de hooks do React, mas tratei os hooks como os [composables do Vue](https://vuejs.org/guide/reusability/composables.html). Isso porque não tive tempo para estudar mais sobre design de software no React.
 
 Neste projeto, minha ideia é que:
 
-- Componentes devem evitar utilizar hooks diretamente. Em vez disso, componentes notificam suas alterações e o
-  componente root da página é responsável por chamar os hooks.
-- Componentes root da aplicação são responsáveis por chamar os hooks, mas devem evitar acessar o `context` diretamente.
-  Quem acessa o `context` são os hooks.
+- Componentes devem evitar utilizar hooks diretamente. Em vez disso, componentes notificam suas alterações e o componente root da página é responsável por chamar os hooks.
+- Componentes root da aplicação são responsáveis por chamar os hooks, mas devem evitar acessar o `context` diretamente. Quem acessa o `context` são os hooks.
 
-Hooks (pelo menos neste caso) atuam apenas como orquestradores, sabendo tudo o que precisa acontecer na página para
-efetuar uma ação. Por exemplo, no hook `useRegistration`, ao aprovar uma `registration`, o hook sabe que:
+Hooks (pelo menos neste caso) atuam apenas como orquestradores, sabendo tudo o que precisa acontecer na página para efetuar uma ação. Por exemplo, no hook `useRegistration`, ao aprovar uma `registration`, o hook sabe que:
 
 1. Precisa abrir um modal de confirmação da ação.
 2. Quando a ação é confirmada, ele sabe quem chamar para efetuar a ação.
@@ -20,5 +15,4 @@ efetuar uma ação. Por exemplo, no hook `useRegistration`, ao aprovar uma `regi
 4. Quando ocorre um erro, ele sabe que precisa fechar o modal e enviar uma notificação de erro na tela.
 5. Quando o usuário cancela a ação, ele sabe que precisa apenas fechar o modal.
 
-Durante o desenvolvimento da aplicação, surgiram várias dúvidas sobre se esse era realmente o "padrão" dos hooks no
-React. No entanto, como não tive tempo para estudar mais a fundo, segui com essa ideia, que parece resolver bem pelo menos para este projeto.
+Durante o desenvolvimento da aplicação, surgiram várias dúvidas sobre se esse era realmente o "padrão" dos hooks no React. No entanto, como não tive tempo para estudar mais a fundo, segui com essa ideia, que parece resolver bem pelo menos para este projeto.
