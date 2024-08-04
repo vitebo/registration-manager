@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '~~/unit/fixtures';
 
 import { Button } from '~/components/Buttons';
 
-describe('Button', () => {
-  it.skip('Should show button', () => {
+describe('Components > Button', () => {
+  it('Should show button', () => {
     render(<Button>Ativar</Button>);
     expect(screen.getByRole('button', { name: /ativar/i }));
   });
