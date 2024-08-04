@@ -1,0 +1,9 @@
+# `~/drivers/`
+
+Nessa pasta temos as implementações de infraestrutura da aplicação.
+Então aqui temos implementações de `http-client` e `storage`.
+Essas implementações são utilizadas para abstrair a comunicação com a API como `localstorage` por exemplo.
+Dessa forma fica bem fácil de criar um `adapter` de um `storage` utilizando uma lib (ou não) e ficar fácil de trocar a
+implementação.
+
+A principal ideia é não se acoplar com um `driver` específico ou com uma lib que utiliza esse `driver`.

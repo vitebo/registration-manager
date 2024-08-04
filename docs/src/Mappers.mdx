@@ -1,0 +1,10 @@
+# `~/mappers/`
+
+Mappers é só um pattern bem simples para facilitar a conversão de um objeto para outro.
+
+Por exemplo, durante a aplicação inteira nós trabalhamos com a entidade `Registration`, mas quando vamos enviar
+para a API, precisamos converter para um objeto que a API entenda, a mesma coisa para quando recebemos um objeto da API,
+precisamos converter um JSON para a entidade `Registration`, como `Registration` é uma classe, um `JSON.parse` /
+`JSON.stringify` não vai funcionar.
+
+Os mappers servem para resolver esse problema, eles convertem um objeto para outro e vice-versa.

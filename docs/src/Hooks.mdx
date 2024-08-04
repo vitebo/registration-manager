@@ -1,0 +1,25 @@
+# `~/hooks/`
+
+Aqui talvez eu tenha me perdido um pouco no conceito de hooks do react, mas eu tratei os hooks como
+os [composables do vue](https://vuejs.org/guide/reusability/composables). Isso porque eu não consegui
+tempo para estudar essa parte mais de `design de software` dentro do react.
+
+Mas na minha ideia nesse projeto é que:
+
+- componentes não devem evitar utilizar hooks diretamente, componentes sempre notificam a suas alterações e o componente
+  root da página é responsável por chamar os hooks.
+- componentes root da aplicação são responsáveis por chamar os hooks, mas devem evitar acessar o `context` diretamente,
+  quem acessa o `context` são os hooks.
+
+Hook (pelo menos nesse caso) atua apenas como um orquestrador, onde ele sabe tudo que precisa acontecer na página para
+efetuar uma ação. Por exemplo, o hook `useRegistration` na action de aprovar uma `registration`, o hook sabe que:
+
+1. precisar abrir um modal de confirmação da ação
+2. quando confirmado a ação, ele sabe quem chamar que vai sabe efetuar essa ação
+3. quando a ação é efetuada, ele sabe que precisa fechar o modal e enviar uma notificação de sucesso na tela
+4. quando aconte um erro, ele sabe que precisa fechar o modal e enviar uma notificação de erro na tela
+5. quando o usuário cancela a ação, ele sabe que precisa apenas fechar o modal
+
+Ao decorrer do desenvolvimento da aplicação foi surgindo diversas dúvidas se esse era realmente o "padrão" dos hooks
+no react, mas como eu não tive tempo para estudar mais a fundo, eu segui com essa ideia que parece resolver
+bem pelo menos para esse projeto.

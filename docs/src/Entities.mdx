@@ -1,0 +1,26 @@
+# `~/entities/`
+
+Nessa pasta temos as entidades da aplicação.
+As entidades são os objetos que representam os dados da aplicação. Não encare isso como um DDD ou algo do tipo,
+essa não é a intenção. A ideia aqui é apenas usufruir de alguns conceitos que ajudam a organizar o código.
+
+Todas as regras de negócios descritas no desafio estão implementadas nas entidades, isso é feito para que as regras
+de negócio fiquem centralizadas e não sejam espalhadas pela aplicação além de facilitar os testes para conseguir
+estressar todos os cenários possíveis.
+
+## `registration-status.ts`
+
+Esse arquivo contém a máquina de estados que possui as regras de transição de status de um `status` da `registration`.
+A sua estrutura pode ser um pouco confusa no primeiro momento, isso porque essa é apenas uma implementação
+básica de uma máquina de estados para que não precisar instalar uma lib para isso.
+Apesar de bem simples, ela atende bem as necessidades e escala com muita facilidade caso entrem regras mais complexas
+sobre a atualização de status.
+
+## `registration.ts`
+
+Registration é a unica entidade da aplicação, o que justifica a pasta `entities` é que eu coloquei os
+values objects (Cpf, Email, Name, etc..) da aplicação aqui, então a pasta ta mais para um `business` do que `entities`.
+
+Outra coisa que se pode observar é a entidade de `registration` es'ta cuidando de `adminssionDateFormated`. O ideal
+seria ter um `value object` para isso, mas como não havia nenhum regra associada a essa propriedade, eu preferi
+simplesmente deixar ela na entidade.

@@ -1,0 +1,28 @@
+# Registration Manager
+
+A ideia dessa documentação é compartilhar um pouco a estrutura do projeto, decisões tomadas,
+problemas encontrados e como eles foram resolvidos.
+
+## Disclaimer
+
+Eu não tenho experiências recentes com desenvolvimento React então algumas "gafes" podem ser
+encontradas nesse projeto. Algumas que eu mesmo ja identifiquei e vou comentar ao longo da documentação.
+Muito desses problemas são por falta de experiência recente com react, então essa aplicação é praticamente
+um "react like a vue"
+
+Embora esses problemas existam, acredito que o projeto está bem estruturado e organizado.
+
+## Bootstrap
+
+Ja na estrura no root existe uma alteração que é importante. Diferente de outros aplicativos react com vite
+onde arquivo `index.html` define o entry point da aplicação com o script:
+
+```html
+<script type="module" src="/src/main.tsx"></script>
+```
+
+Nesse projeto as coisas acontecem diferente, ao invés de definir um `script` com um `src`
+estático no arquivo `index.html`, esse `script` é inserido pelo `vite` na hora do build. Isso é
+feito via plugin do `vite` que está definido no próprio `vite.config.ts`, o plugin se chama `entry-point-by-mode`.
+
+Ao decorrer da documentação vou explicar um pouco mais sobre o `entry-point-by-mode` e como ele funciona.
