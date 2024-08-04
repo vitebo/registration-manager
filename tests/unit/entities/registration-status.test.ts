@@ -1,6 +1,5 @@
-import { RegistrationFactory } from '~~/test/factory';
-
-import { RegistrationStatusEnum, RegistrationStatusFactory } from './registration-status';
+import { RegistrationStatusEnum, RegistrationStatusFactory } from '~/entities/registration-status';
+import { RegistrationFactory } from '~~/factories';
 
 describe('Entities > Registration Status', () => {
   describe('when status is "REVIEW"', () => {

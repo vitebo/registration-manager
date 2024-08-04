@@ -6,7 +6,7 @@ import { defineConfig } from 'vite';
 
 const configByMode = {
   e2e: {
-    entryPoint: '/e2e/main.tsx',
+    entryPoint: '/tests/e2e/main.tsx',
     base: '/'
   },
   development: {

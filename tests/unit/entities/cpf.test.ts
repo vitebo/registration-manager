@@ -1,4 +1,4 @@
-import { Cpf, CpfEmptyError, CpfFormatError, CpfLengthError } from './cpf';
+import { Cpf, CpfEmptyError, CpfFormatError, CpfLengthError } from '~/entities/cpf';
 
 describe('Entities > CPF', () => {
   test.each(['97456321558', '71428793860', '87748248800'])('should create a CPF with value %s', (cpf) => {

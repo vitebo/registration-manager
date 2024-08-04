@@ -15,7 +15,7 @@ export default {
   },
   moduleNameMapper: {
     '^~/(.+)': '<rootDir>/src/$1',
-    '^~~/(.+)': '<rootDir>/$1'
+    '^~~/(.+)': '<rootDir>/tests/$1'
   },
-  testPathIgnorePatterns: ['/node_modules/', '<rootDir>/e2e']
+  testPathIgnorePatterns: ['/node_modules/', '<rootDir>/tests/e2e/']
 };

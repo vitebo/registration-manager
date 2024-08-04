@@ -22,7 +22,6 @@
     "allowSyntheticDefaultImports": true
   },
   "include": ["src"],
-  "exclude": ["src/docs"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "extends": "./tsconfig.paths.json"
 }

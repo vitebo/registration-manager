@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { Button } from '.';
+import { Button } from '~/components/Buttons';
 
 describe('Button', () => {
   it.skip('Should show button', () => {

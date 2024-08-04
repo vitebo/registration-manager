@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 
 // eslint-disable-next-line import/no-default-export
 export default defineConfig({
-  testDir: './e2e',
+  testDir: './tests/e2e',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,

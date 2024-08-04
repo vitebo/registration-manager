@@ -3,7 +3,7 @@ import {
   EmployeeNameFirstLetterIsNumberError,
   // EmployeeNameEmptyError,
   EmployeeNameDontHaveMoreThanOneNameError
-} from './employee-name';
+} from '~/entities/employee-name';
 
 // TODO test this error
 // EmployeeNameEmptyError

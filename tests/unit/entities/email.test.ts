@@ -1,4 +1,4 @@
-import { Email, EmailEmptyError, EmailFormatError } from './email';
+import { Email, EmailEmptyError, EmailFormatError } from '~/entities/email';
 
 describe('Entities > CPF', () => {
   test.each([
