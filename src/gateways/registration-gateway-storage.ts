@@ -1,5 +1,5 @@
-import { Cpf, Registration } from '~/entities';
 import { Storage } from '~/drivers';
+import { Cpf, Registration } from '~/entities';
 import { StorageRegistrationMapper } from '~/mappers';
 
 import { RegistrationGateway } from './registration-gateway';

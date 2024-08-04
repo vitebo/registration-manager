@@ -1,5 +1,16 @@
 module.exports = {
-  extends: ['eslint:recommended', 'plugin:import/recommended', 'plugin:import/typescript', 'plugin:react/recommended', 'plugin:import/recommended', 'plugin:jsx-a11y/recommended', 'plugin:@typescript-eslint/recommended', 'plugin:react-hooks/recommended', 'eslint-config-prettier', 'plugin:storybook/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
+    'plugin:react/recommended',
+    'plugin:import/recommended',
+    'plugin:jsx-a11y/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
+    'eslint-config-prettier',
+    'plugin:storybook/recommended'
+  ],
   plugins: ['@typescript-eslint', 'import'],
   settings: {
     react: {
@@ -24,7 +35,9 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'import/no-internal-modules': [
       'error',
-      { allow: ['~/*', '~/pages/*', '~/components/*', 'react-dom/client', 'react-icons/hi', '~~/**/*'] }
+      {
+        allow: ['~/*', '~/pages/*', '~/components/*', 'react-dom/client', 'react-icons/hi', '~~/**/*']
+      }
     ],
     'import/order': [
       'error',
@@ -46,31 +59,26 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['*.test.ts'],
+      files: ['tests/**/*.ts'],
       settings: {
         'import/resolver': {
           typescript: {
             project: './tsconfig.test.json'
           },
           node: {
-            paths: ['src', 'test'],
+            paths: ['src', 'tests'],
             extensions: ['.js', '.jsx', '.ts', '.tsx']
           }
         }
+      },
+      rules: {
+        'import/no-internal-modules': 'off'
       }
     },
     {
-      files: ['e2e/**/*.ts'],
-      settings: {
-        'import/resolver': {
-          typescript: {
-            project: './e2e/tsconfig.json'
-          },
-          node: {
-            paths: ['src', 'test', 'e2e'],
-            extensions: ['.js', '.jsx', '.ts', '.tsx']
-          }
-        }
+      files: ['docs/**/*'],
+      rules: {
+        'import/no-default-export': 'off'
       }
     }
   ]
