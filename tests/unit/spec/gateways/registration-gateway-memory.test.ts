@@ -1,5 +1,5 @@
 import { RegistrationGatewayMemory } from '~/gateways/registration-gateway-memory';
-import { RegistrationFactory } from '~~/factories';
+import { RegistrationFactory } from '~~/unit/factories';
 
 describe('Gateways > Registrations Memory', () => {
   it('starts with no registrations', async () => {
