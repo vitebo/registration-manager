@@ -20,9 +20,13 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-width: 320px;
   padding: ${({ theme }) => theme.spacing['3xl']};
   position: relative;
+  margin: ${({ theme }) => theme.spacing.xl};
+
+  @media (min-width: ${({ theme }) => theme.screens.sm}) {
+    min-width: 320px;
+  }
 `;
 
 export const CloseButton = styled.button`

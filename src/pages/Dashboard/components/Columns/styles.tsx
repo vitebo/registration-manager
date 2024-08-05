@@ -5,11 +5,18 @@ import { RegistrationStatusEnum } from '~/entities';
 export const Container = styled.div`
   display: grid;
   flex-grow: 1;
-  grid-gap: ${({ theme }) => theme.spacing['3xl']};
-  grid-template-columns: repeat(3, 1fr);
+  grid-gap: ${({ theme }) => theme.spacing.lg};
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, auto);
   justify-content: center;
   margin-top: ${({ theme }) => theme.spacing['3xl']};
   overflow: hidden;
+
+  @media (min-width: ${({ theme }) => theme.screens.sm}) {
+    grid-gap: ${({ theme }) => theme.spacing['3xl']};
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+  }
 `;
 
 const skeletonLoading = keyframes`
@@ -24,7 +31,6 @@ export const Column = styled.section.withConfig({
   border-radius: ${({ theme }) => theme.borderRadius['3xl']};
   display: flex;
   flex-direction: column;
-  flex: 1;
   overflow: hidden;
   padding-bottom: ${({ theme }) => theme.spacing['xl']};
   animation: ${skeletonLoading} 1.5s infinite;
@@ -88,6 +94,8 @@ export const CollumContent = styled.ul`
   }
 
   & > *:last-child {
-    margin-bottom: ${({ theme }) => theme.spacing['xl']};
+    @media (min-width: ${({ theme }) => theme.screens.sm}) {
+      margin-bottom: ${({ theme }) => theme.spacing['xl']};
+    }
   }
 `;

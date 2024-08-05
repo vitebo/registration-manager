@@ -10,6 +10,7 @@ declare module 'styled-components' {
   type FontWeight = typeof theme.fontWeight;
   type BoxShadow = typeof theme.boxShadow;
   type BorderWidth = typeof theme.borderWidth;
+  type Screens = typeof theme.screens;
 
   export interface DefaultTheme {
     colors: Colors;
@@ -19,5 +20,6 @@ declare module 'styled-components' {
     fontWeight: FontWeight;
     boxShadow: BoxShadow;
     borderWidth: BorderWidth;
+    screens: Screens;
   }
 }

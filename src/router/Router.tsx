@@ -12,7 +12,10 @@ const Container = styled.main`
   flex-direction: column;
   flex-grow: 1;
   margin-top: ${HEADER_HEIGHT};
-  max-height: calc(100vh - ${HEADER_HEIGHT});
+
+  @media (min-width: ${({ theme }) => theme.screens.sm}) {
+    max-height: calc(100vh - ${HEADER_HEIGHT});
+  }
 `;
 
 export const Router = () => {
